@@ -1,0 +1,28 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: object-src 'none'; base-uri 'none'; frame-ancestors 'none';
+
+/
+  Content-Type: text/html; charset=utf-8
+
+/index.html
+  Content-Type: text/html; charset=utf-8
+
+/en.html
+  Content-Type: text/html; charset=utf-8
+
+/style.css
+  Content-Type: text/css; charset=utf-8
+
+/app.js
+  Content-Type: application/javascript; charset=utf-8
+
+/translations.js
+  Content-Type: application/javascript; charset=utf-8
+
+/assets/pickup-ios-intro.mp4
+  Accept-Ranges: bytes
+  Cache-Control: public, max-age=604800

@@ -1,0 +1,7 @@
+.DS_Store
+.wrangler/
+local-artifacts/
+video/node_modules/
+video/out/
+__pycache__/
+*.pyc

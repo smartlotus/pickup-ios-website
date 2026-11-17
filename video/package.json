@@ -1,0 +1,25 @@
+{
+  "name": "pickup-ios-promo-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "34s 1080p 60fps iOS 26 Liquid Glass promo video for Pickup for iPhone & iPad built with Remotion 4",
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "audio": "python3 generate_audio.py",
+    "typecheck": "tsc --noEmit",
+    "still": "remotion still src/index.ts PickupIntro out/pickup-still.png --frame=360 --browser-executable=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"",
+    "render": "remotion render src/index.ts PickupIntro out/pickup-intro.mp4 --codec=h264 --crf=20 --browser-executable=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\""
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.544",
+    "@remotion/renderer": "4.0.544",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.544"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.2"
+  }
+}

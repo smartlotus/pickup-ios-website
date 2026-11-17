@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en" data-theme="purple">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0D0C12">
+  <script>
+    try {
+      var t = localStorage.getItem('pickup_theme');
+      if (t === 'mono' || t === 'purple') {
+        document.documentElement.dataset.theme = t;
+      }
+    } catch (_) {}
+  </script>
+  <meta name="description" content="Pickup for iPhone &amp; iPad (iOS 26 Liquid Glass): Keep the little things. Purple Dark &amp; Monochrome themes, red-pen timeline, zero-media AI disclosure, AES-256-GCM vault, and zero $99 developer fee sideloading.">
+  <meta property="og:title" content="Pickup for iOS 26 &amp; iPadOS · Keep the little things.">
+  <meta property="og:description" content="A local-first memory capsule sculpted in iOS 26 Liquid Glass with 100% lossless Android v2 compatibility and zero $99 Apple Developer fee.">
+  <meta property="og:image" content="assets/video-poster.png">
+  <link rel="icon" href="assets/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="alternate" hreflang="zh-CN" href="index.html">
+  <link rel="stylesheet" href="style.css">
+  <script src="translations.js" defer></script>
+  <script src="app.js" defer></script>
+  <title>Pickup for iOS 26 &amp; iPadOS · Keep the little things.</title>
+</head>
+<body>
+  <!-- Inline SVG optical Liquid Glass displacement filter -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true">
+    <defs>
+      <filter id="liquid-glass-refraction" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="11" result="noise"/>
+        <feGaussianBlur in="noise" stdDeviation="2.2" result="smoothNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="smoothNoise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="ambient-field" aria-hidden="true">
+    <div class="ambient-grid"></div>
+  </div>
+  <div id="live-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="header-capsule glass-panel glass-interactive">
+      <a class="brand" href="#main-content" aria-label="Pickup Home">
+        <img class="brand-icon" src="assets/icon.png" width="32" height="32" alt="">
+        <span class="brand-name">Pickup</span>
+        <span class="brand-badge">iOS 26</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#simulator">Simulator</a>
+        <a href="#gallery">Screens</a>
+        <a href="#vault">Data Vault</a>
+        <a href="#install">Free Install</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="header-controls">
+        <nav class="lang-switch" aria-label="Language switch">
+          <a href="index.html" lang="zh-CN" hreflang="zh-CN">中</a>
+          <span aria-current="page">EN</span>
+        </nav>
+        <button type="button" class="theme-btn" id="theme-toggle" aria-pressed="false">
+          <span class="theme-swatch" aria-hidden="true"></span>
+          <span id="theme-toggle-label">Purple Dark</span>
+        </button>
+        <a class="nav-ipa-cta" href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">Download IPA ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <!-- HERO -->
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-shell">
+        <div>
+          <div class="hero-badges">
+            <span class="hero-pill">iOS 26 &amp; iPadOS · Liquid Glass</span>
+            <span class="hero-pill accent-gold">Zero $99 Apple Dev Fee Sideload</span>
+          </div>
+
+          <h1 class="hero-title" id="hero-title">
+            Keep the <span class="redpen-wrap">little<svg class="redpen-svg" viewBox="0 0 220 96" aria-hidden="true"><path class="redpen-path" d="M188 26 C140 4, 24 10, 14 48 C6 82, 74 92, 142 84 C196 78, 212 40, 166 18"/></svg></span> things.
+          </h1>
+
+          <p class="hero-desc">
+            A local-first memory capsule built for iPhone &amp; iPadOS 26 Liquid Glass. Pair Editorial Serif typography with Purple Dark or Monochrome themes, circle recorded days in red ink, reply to past memories, and keep full data sovereignty—without paying Apple's $99 developer fee.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn-primary" href="#simulator">Try Liquid Glass Live ↓</a>
+            <button type="button" class="btn-glass glass-pill glass-interactive" command="show-modal" commandfor="film-dialog">▶ Watch 60fps Film</button>
+            <a class="btn-ghost" href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">Download IPA / GitHub ↗</a>
+          </div>
+
+          <ul class="hero-metrics">
+            <li>
+              <strong>$0</strong>
+              <span>No $99 Apple Dev Fee · Wi-Fi Refresh</span>
+            </li>
+            <li>
+              <strong>0 bytes</strong>
+              <span>Media Never Sent in AI Prompts</span>
+            </li>
+            <li>
+              <strong>AES-256</strong>
+              <span>GCM Encrypted Vault + Android v2 ZIP</span>
+            </li>
+          </ul>
+        </div>
+
+        <aside class="hero-artifact glass-panel glass-interactive" aria-label="Memory dial and product preview">
+          <div class="dial-card-head">
+            <div class="dial-app-id">
+              <img src="assets/icon.png" width="45" height="45" alt="Pickup app icon">
+              <div>
+                <strong>Pickup for iOS</strong>
+                <span>SwiftUI · iOS 26 &amp; iPadOS</span>
+              </div>
+            </div>
+            <span class="hero-pill accent-gold">v1.0.0</span>
+          </div>
+
+          <div class="dial-visual">
+            <svg class="memory-dial-svg" viewBox="0 0 220 220" role="img" aria-label="Vintage gold memory dial motif">
+              <circle cx="110" cy="110" r="98" fill="none" stroke="rgba(197, 168, 106, 0.25)" stroke-width="1.5"/>
+              <circle cx="110" cy="110" r="84" fill="none" stroke="rgba(197, 168, 106, 0.45)" stroke-width="1.5" stroke-dasharray="4 7"/>
+              <circle cx="110" cy="110" r="68" fill="none" stroke="rgba(167, 139, 250, 0.28)" stroke-width="1"/>
+              <path d="M172 52 C136 16, 48 26, 36 98 C24 166, 86 196, 148 180 C190 168, 198 92, 160 44" fill="none" stroke="#F46862" stroke-width="3.2" stroke-linecap="round"/>
+              <line x1="146" y1="74" x2="169" y2="51" stroke="#C5A86A" stroke-width="2.6" stroke-linecap="round"/>
+              <circle cx="169" cy="51" r="4" fill="#C5A86A"/>
+            </svg>
+            <div class="dial-center-readout">
+              <span class="dial-kanji" lang="zh-CN">拾</span>
+              <span class="dial-sub">11 · 17 · REVISIT</span>
+            </div>
+          </div>
+
+          <div class="hero-film-teaser">
+            <div>
+              <strong>36-Second 60fps Showcase Film</strong>
+              <span>Liquid Glass · Red-Pen Calendar · Data Vault</span>
+            </div>
+            <button type="button" class="sim-mini-btn" command="show-modal" commandfor="film-dialog">▶ Play</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE DUAL-DEVICE SIMULATOR -->
+    <section class="wrap reveal-section" id="simulator" aria-labelledby="sim-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>01 / INTERACTIVE DUAL-DEVICE STAGE</p>
+          <h2 class="section-title" id="sim-title">One local core. Fluid across iPhone &amp; iPadOS.</h2>
+        </div>
+        <p class="section-sub">Switch between iPhone 17 Pro and iPad Pro Split-View right here. Test search filters, red-pen timeline dates, live Revisit replies, zero-media AI disclosure, and the Data Vault.</p>
+      </div>
+
+      <div class="sim-toolbar glass-panel glass-interactive">
+        <div class="device-tablist" role="tablist" aria-label="Simulator device form factor" focusgroup="tablist nomemory">
+          <button type="button" role="tab" class="sim-tab-btn" id="dev-tab-iphone" aria-selected="true" focusgroupstart data-device="iphone">iPhone 17 Pro</button>
+          <button type="button" role="tab" class="sim-tab-btn" id="dev-tab-ipad" aria-selected="false" data-device="ipad">iPad Pro Split-View</button>
+        </div>
+
+        <div class="sim-toolbar-right">
+          <button type="button" class="sim-mini-btn" id="sim-reset-btn">↻ Reset Demo</button>
+        </div>
+      </div>
+
+      <div class="simulator-stage" id="simulator-stage" data-device="iphone">
+        <div class="device-chassis">
+          <div class="device-bezel">
+            <div class="device-status-bar">
+              <span>9:41</span>
+              <div class="dynamic-island" aria-hidden="true"></div>
+              <span class="ipad-split-badge">iPadOS 26 · Three-Column Split View</span>
+              <span>5G · 100%</span>
+            </div>
+
+            <div class="sim-workspace">
+              <!-- iPad Split View Sidebar -->
+              <aside class="sim-ipad-sidebar" aria-label="iPad Sidebar Navigation">
+                <div>
+                  <div class="ipad-sidebar-brand">
+                    <img src="assets/icon.png" width="28" height="28" alt="">
+                    <strong>Pickup · iPadOS</strong>
+                  </div>
+                  <div class="ipad-sidebar-nav" role="tablist" aria-orientation="vertical" aria-label="iPad Simulator Views" focusgroup="tablist nomemory">
+                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-journal" aria-selected="true" focusgroupstart data-sim-tab="journal"><span>Capture</span><span>5</span></button>
+                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-timeline" aria-selected="false" data-sim-tab="timeline"><span>Timeline</span><span>7</span></button>
+                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-revisit" aria-selected="false" data-sim-tab="revisit"><span>Revisit</span><span>1</span></button>
+                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-ai" aria-selected="false" data-sim-tab="ai"><span>AI Hub</span><span>0B</span></button>
+                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-vault" aria-selected="false" data-sim-tab="vault"><span>Data Vault</span><span>ZIP</span></button>
+                  </div>
+                </div>
+                <div class="ipad-kbd-row">
+                  <kbd>⌘N</kbd><kbd>⌘F</kbd><kbd>⌘1–5</kbd>
+                </div>
+              </aside>
+
+              <!-- Main Interactive Screen -->
+              <div class="sim-main-col">
+                <div class="sim-app-header">
+                  <span class="sim-app-title">Pickup</span>
+                  <span class="sim-streak-pill">7-Day Streak</span>
+                </div>
+
+                <div class="sim-panels-stack">
+                  <!-- TAB 1: JOURNAL CAPTURE -->
+                  <div role="tabpanel" id="sim-panel-journal" aria-labelledby="dock-tab-journal">
+                    <div class="panel-inner">
+                      <div class="sim-search-row">
+                        <label for="sim-search-input" class="visually-hidden">Search memories, songs, tags, or replies</label>
+                        <input type="search" id="sim-search-input" class="sim-search-input" placeholder="Search memories, songs, tags, or replies…">
+                      </div>
+                      <div class="sim-filter-strip" role="group" aria-label="Journal entry filters">
+                        <button type="button" class="chip-btn" data-journal-filter="all" aria-pressed="true">All</button>
+                        <button type="button" class="chip-btn" data-journal-filter="today" aria-pressed="false">Today</button>
+                        <button type="button" class="chip-btn" data-journal-filter="photos" aria-pressed="false">Photos</button>
+                        <button type="button" class="chip-btn" data-journal-filter="reflections" aria-pressed="false">Replies</button>
+                        <button type="button" class="chip-btn" data-journal-filter="pinned" aria-pressed="false">Pinned</button>
+                      </div>
+                      <div id="sim-journal-list" class="sim-entry-list">
+                        <article class="sim-entry-card">
+                          <div class="entry-meta-row">
+                            <span>Today · 20:14</span>
+                            <div class="entry-badges">
+                              <span class="badge-tag">Unwound</span>
+                              <span class="badge-tag">Breeze 18°C</span>
+                            </div>
+                          </div>
+                          <p class="entry-prose">Took the long way home after work. The corner flower shop still had its warm lights on, so I picked up chamomile and walked back slowly in the cool breeze.</p>
+                          <span class="soundtrack-pill">♪ Evening Breeze — Night Radio</span>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- TAB 2: TIMELINE -->
+                  <div role="tabpanel" id="sim-panel-timeline" aria-labelledby="dock-tab-timeline" hidden="until-found">
+                    <div class="panel-inner">
+                      <div class="calendar-card">
+                        <div class="calendar-header">
+                          <strong>November 2026</strong>
+                          <span class="badge-tag">Red circles mark memories</span>
+                        </div>
+                        <div class="calendar-weekdays" aria-hidden="true">
+                          <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                        </div>
+                        <div id="sim-calendar-days" class="calendar-days"></div>
+                      </div>
+                      <div id="sim-timeline-selected" class="sim-entry-list"></div>
+                      <div id="sim-on-this-day" class="on-this-day-card"></div>
+                    </div>
+                  </div>
+
+                  <!-- TAB 3: REVISIT -->
+                  <div role="tabpanel" id="sim-panel-revisit" aria-labelledby="dock-tab-revisit" hidden="until-found">
+                    <div class="panel-inner">
+                      <div class="revisit-header">
+                        <span class="gold-kicker">TODAY'S PICK · REVISIT DIAL</span>
+                        <button type="button" id="sim-revisit-shuffle" class="sim-mini-btn">↻ Pick Another Memory</button>
+                      </div>
+                      <div id="sim-revisit-card" class="revisit-card"></div>
+                      <form id="sim-revisit-form" class="revisit-reply-form">
+                        <label for="sim-revisit-input" class="visually-hidden">Leave a reply to your past self</label>
+                        <input id="sim-revisit-input" type="text" placeholder="Leave a reply to your past self…" required>
+                        <button type="submit">Add Reply</button>
+                      </form>
+                    </div>
+                  </div>
+
+                  <!-- TAB 4: AI HUB -->
+                  <div role="tabpanel" id="sim-panel-ai" aria-labelledby="dock-tab-ai" hidden="until-found">
+                    <div class="panel-inner">
+                      <div class="sim-filter-strip" role="group" aria-label="AI context scope">
+                        <button type="button" class="chip-btn" data-ai-scope="intelligent" aria-pressed="true">Smart Match</button>
+                        <button type="button" class="chip-btn" data-ai-scope="all" aria-pressed="false">All Entries</button>
+                        <button type="button" class="chip-btn" data-ai-scope="custom" aria-pressed="false">Date Range</button>
+                      </div>
+                      <div class="sim-filter-strip" role="group" aria-label="Sample prompts">
+                        <button type="button" class="chip-btn" data-ai-prompt="calm" aria-pressed="true">Calmest moments?</button>
+                        <button type="button" class="chip-btn" data-ai-prompt="songs" aria-pressed="false">Recent soundtrack</button>
+                        <button type="button" class="chip-btn" data-ai-prompt="summary" aria-pressed="false">Weekly digest</button>
+                      </div>
+                      <div id="sim-ai-disclosure" class="ai-disclosure-card"></div>
+                      <div id="sim-ai-answer" class="ai-answer-box"></div>
+                    </div>
+                  </div>
+
+                  <!-- TAB 5: DATA VAULT -->
+                  <div role="tabpanel" id="sim-panel-vault" aria-labelledby="dock-tab-vault" hidden="until-found">
+                    <div class="panel-inner">
+                      <div class="vault-ring-row">
+                        <svg id="sim-storage-ring" class="storage-ring-svg" viewBox="0 0 120 120" role="img" aria-labelledby="ring-title">
+                          <title id="ring-title">Local Storage Breakdown Ring</title>
+                        </svg>
+                        <ul id="sim-storage-legend" class="storage-legend"></ul>
+                      </div>
+
+                      <div class="vault-controls-card">
+                        <div class="sim-filter-strip" role="group" aria-label="Auto-backup frequency">
+                          <button type="button" class="chip-btn" data-vault-freq="6h" aria-pressed="false">Every 6h</button>
+                          <button type="button" class="chip-btn" data-vault-freq="daily" aria-pressed="true">Daily 22:30</button>
+                          <button type="button" class="chip-btn" data-vault-freq="weekly" aria-pressed="false">Weekly</button>
+                        </div>
+                        <div class="sim-filter-strip" role="group" aria-label="Snapshot retention">
+                          <button type="button" class="chip-btn" data-vault-ret="7" aria-pressed="true">Keep 7</button>
+                          <button type="button" class="chip-btn" data-vault-ret="15" aria-pressed="false">Keep 15</button>
+                          <button type="button" class="chip-btn" data-vault-ret="all" aria-pressed="false">Keep All</button>
+                        </div>
+                        <div class="sim-filter-strip" role="group" aria-label="Export archive format">
+                          <button type="button" class="chip-btn" data-vault-format="zip" aria-pressed="true">Android v2 ZIP</button>
+                          <button type="button" class="chip-btn" data-vault-format="vault" aria-pressed="false">Encrypted .pickupvault</button>
+                          <button type="button" class="chip-btn" data-vault-format="markdown" aria-pressed="false">Markdown Bundle</button>
+                        </div>
+                        <button type="button" id="sim-vault-backup-btn" class="btn-primary">Simulate Backup Now</button>
+                        <div id="sim-vault-toast" class="sim-toast" role="status" hidden></div>
+                        <pre id="sim-vault-preview" class="vault-format-pre"></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- iPhone Floating Liquid Glass Bottom Dock -->
+                <div class="sim-iphone-dock" role="tablist" aria-label="iPhone Bottom Liquid Glass Dock" focusgroup="tablist nomemory">
+                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-journal" aria-selected="true" focusgroupstart data-sim-tab="journal">Capture</button>
+                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-timeline" aria-selected="false" data-sim-tab="timeline">Timeline</button>
+                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-revisit" aria-selected="false" data-sim-tab="revisit">Revisit</button>
+                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-ai" aria-selected="false" data-sim-tab="ai">AI Hub</button>
+                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-vault" aria-selected="false" data-sim-tab="vault">Vault</button>
+                </div>
+              </div>
+
+              <!-- iPad Right Live Inspector -->
+              <aside class="sim-ipad-inspector" aria-label="iPad Live Inspector">
+                <div id="sim-inspector-content"></div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILM SHOWCASE BANNER -->
+    <section class="wrap reveal-section" id="film" aria-labelledby="film-title">
+      <div class="film-banner glass-panel glass-interactive">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>02 / 60FPS PRODUCT FILM</p>
+          <h2 class="section-title" id="film-title">Refracted glass, red ink, and quiet echoes.</h2>
+          <p class="section-sub">Open the native top-layer cinema modal to watch the 60fps product film with full soundtrack and interactive chapter jumps.</p>
+          <div class="hero-actions" style="margin-block-start: 1.35rem; margin-block-end: 0;">
+            <button type="button" class="btn-primary" command="show-modal" commandfor="film-dialog">▶ Play 60fps Film</button>
+            <a class="btn-ghost" href="assets/pickup-ios-intro.mp4" download="pickup-ios-intro.mp4">Download MP4 ↓</a>
+          </div>
+        </div>
+        <button type="button" class="film-poster-trigger" command="show-modal" commandfor="film-dialog" aria-label="Open 60fps showcase film">
+          <img src="assets/video-poster.png" width="1280" height="720" loading="lazy" decoding="async" alt="Pickup for iOS 26 showcase video poster">
+          <span class="film-play-overlay" aria-hidden="true">
+            <span class="film-play-badge">▶ 1080p · 60fps</span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- iOS 26 LIQUID GLASS UI GALLERY -->
+    <section class="wrap gallery-section reveal-section" id="gallery" aria-labelledby="gallery-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>03 / iOS 26 &amp; iPadOS UI SHOWCASE</p>
+          <h2 class="section-title" id="gallery-title">iOS 26 Liquid Glass UI showcase.</h2>
+        </div>
+        <p class="section-sub">High-fidelity screen previews corresponding 1:1 to our SwiftUI views—from Live Photo journals, red-pen calendar circles, and the Data Vault to Monochrome ink mode and iPad Pro Split-View.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="screen-card glass-panel glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-journal.png" data-lightbox-title="Capture · Purple Dark Liquid Glass">
+            <img src="assets/screens/iphone-journal.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone Capture screen showing Live Photo entry, soundtrack badge, and Liquid Glass dock">
+          </button>
+          <figcaption class="screen-caption">
+            <strong>Capture Feed</strong>
+            <span>iPhone · Purple Dark</span>
+          </figcaption>
+        </figure>
+
+        <figure class="screen-card glass-panel glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-timeline.png" data-lightbox-title="Timeline · Red-Pen Circles &amp; On This Day">
+            <img src="assets/screens/iphone-timeline.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone Timeline monthly calendar with organic red-pen circles and On This Day card">
+          </button>
+          <figcaption class="screen-caption">
+            <strong>Red-Pen Timeline</strong>
+            <span>Circled Days · Echoes</span>
+          </figcaption>
+        </figure>
+
+        <figure class="screen-card glass-panel glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-revisit.png" data-lightbox-title="Revisit · Memory Dial &amp; Cross-Time Replies">
+            <img src="assets/screens/iphone-revisit.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone Revisit view with vintage gold memory dial and live reply box">
+          </button>
+          <figcaption class="screen-caption">
+            <strong>Revisit Dial</strong>
+            <span>Gold Motif · Replies</span>
+          </figcaption>
+        </figure>
+
+        <figure class="screen-card glass-panel glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-datavault.png" data-lightbox-title="Data Vault · Auto-Backup &amp; Storage Breakdown">
+            <img src="assets/screens/iphone-datavault.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone Data Vault screen displaying storage ring, scheduled backup controls, and snapshots">
+          </button>
+          <figcaption class="screen-caption">
+            <strong>Data Vault</strong>
+            <span>Storage Ring · SHA-256</span>
+          </figcaption>
+        </figure>
+
+        <figure class="screen-card glass-panel glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-mono.png" data-lightbox-title="Monochrome · High-Contrast Ink Theme">
+            <img src="assets/screens/iphone-mono.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone Monochrome theme screenshot with deep black canvas and warm ivory serif prose">
+          </button>
+          <figcaption class="screen-caption">
+            <strong>Monochrome Mode</strong>
+            <span>#060606 · Editorial Ink</span>
+          </figcaption>
+        </figure>
+
+        <figure class="screen-card is-wide glass-panel glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/ipad-splitview.png" data-lightbox-title="iPad Pro Split-View · 3-Column Adaptive Workspace">
+            <img src="assets/screens/ipad-splitview.png" width="1366" height="1024" loading="lazy" decoding="async" alt="Pickup iPad Pro three-column Split-View screenshot with sidebar, feed, and live inspector">
+          </button>
+          <figcaption class="screen-caption">
+            <strong>iPad Pro Split-View</strong>
+            <span>3-Column · Shortcuts</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- DATA SOVEREIGNTY & SCHEDULED BACKUP -->
+    <section class="wrap reveal-section" id="vault" aria-labelledby="vault-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>04 / DATA SOVEREIGNTY &amp; SCHEDULED BACKUP</p>
+          <h2 class="section-title" id="vault-title">No servers. Your memories stay 100% yours.</h2>
+        </div>
+        <p class="section-sub">Architected for multi-decade ownership: lossless Android v2 exchange, CryptoKit encryption, security-scoped external backups, and storage hygiene.</p>
+      </div>
+
+      <div class="vault-bento">
+        <article class="vault-card glass-panel glass-interactive">
+          <span class="vault-card-kicker">01 · ANDROID v2 ↔ iOS 100% LOSSLESS ZIP</span>
+          <h3>Lossless Android v2 ZIP Migration</h3>
+          <p>Speaks the exact <code>pickup-portable-backup</code> v2 schema (<code>backup.json</code> + <code>media/</code>) alongside non-intrusive <code>ios-extensions.json</code> for mood, weather, tags, and pins—plus automatic pinned <code>.safetyPreRestore</code> rollback snapshots before overwrite imports.</p>
+        </article>
+
+        <article class="vault-card glass-panel glass-interactive">
+          <span class="vault-card-kicker">02 · CRYPTOKIT .pickupvault ENCRYPTION</span>
+          <h3>AES-256-GCM Encrypted Vaults</h3>
+          <p>Seals your entire journal and media payload using CryptoKit PBKDF2-HMAC-SHA256 key derivation (80,000 iterations + 16-byte random salt) and AES-256-GCM authenticated encryption with 96-bit nonces.</p>
+        </article>
+
+        <article class="vault-card glass-panel glass-interactive">
+          <span class="vault-card-kicker">03 · SECURITY-SCOPED EXTERNAL FOLDER</span>
+          <h3>Scheduled External Backups (Files / iCloud / NAS)</h3>
+          <p><code>BGAppRefreshTask</code> and foreground scheduling write SHA-256 checksummed snapshots every 6 hours, daily at 22:30, or weekly directly into your chosen Files App, iCloud Drive, or SMB NAS security-scoped bookmark—surviving 7-day sideload expiry.</p>
+        </article>
+
+        <article class="vault-card glass-panel glass-interactive">
+          <span class="vault-card-kicker">04 · STORAGE HYGIENE &amp; AI ZERO-MEDIA</span>
+          <h3>Orphan Cleanup &amp; Zero-Media AI Guard</h3>
+          <p><code>DataManagementService</code> audits orphan files, repairs missing references, and surfaces heaviest video clips—while AI Hub enforces a pre-send plain-text disclosure guarantee with <code>0 bytes</code> media uploaded.</p>
+        </article>
+      </div>
+
+      <div class="vault-schema-bar glass-panel glass-interactive">
+        <div>
+          <strong>Inspect the open <code>pickup-portable-backup</code> v2 &amp; <code>.pickupvault</code> schemas</strong>
+          <p class="section-sub">Transparent portable archives you can inspect and restore decades from now.</p>
+        </div>
+        <button type="button" class="btn-glass glass-pill" command="show-modal" commandfor="schema-dialog">Inspect JSON / Vault Schema</button>
+      </div>
+    </section>
+
+    <!-- ZERO-FEE iOS INSTALLATION HUB -->
+    <section class="wrap reveal-section" id="install" aria-labelledby="install-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>05 / ZERO APPLE DEVELOPER FEE</p>
+          <h2 class="section-title" id="install-title">No App Store. No $99 fee. Three ways onto iPhone &amp; iPad.</h2>
+        </div>
+        <p class="section-sub">Download the unsigned IPA from GitHub Releases or compile from source with a free Personal Apple ID.</p>
+      </div>
+
+      <div class="install-card glass-panel glass-interactive">
+        <div class="install-tablist" role="tablist" aria-label="Free iOS installation methods" focusgroup="tablist nomemory">
+          <button type="button" role="tab" class="sim-tab-btn" id="inst-tab-sidestore" aria-selected="true" focusgroupstart data-install-target="sidestore">SideStore / AltStore 7-Day Wi-Fi Refresh</button>
+          <button type="button" role="tab" class="sim-tab-btn" id="inst-tab-sideloadly" aria-selected="false" data-install-target="sideloadly">Sideloadly Desktop Install</button>
+          <button type="button" role="tab" class="sim-tab-btn" id="inst-tab-xcode" aria-selected="false" data-install-target="xcode">Xcode Free Personal Team</button>
+        </div>
+
+        <div class="install-panels">
+          <div role="tabpanel" id="inst-panel-sidestore" aria-labelledby="inst-tab-sidestore">
+            <div class="panel-inner">
+              <h3>SideStore / AltStore: Pair once, refresh wirelessly every 7 days</h3>
+              <ol class="install-step-list">
+                <li>Download the v1.0.0 release bundle from GitHub Releases, or enable cloud <code>macos-26</code> IPA packaging in one command via <code>scripts/enable_cloud_ipa_ci.sh</code>.</li>
+                <li>After initial pairing, refresh directly over Wi-Fi on your iPhone using SideStore + StosVPN—no computer required every week.</li>
+                <li>Enable daily external backups in Data Vault (Files / iCloud Drive) so your entries stay safe even if a certificate expires.</li>
+              </ol>
+              <div class="code-row">
+                <pre><code id="cmd-sidestore">git clone https://github.com/smartlotus/pickup-ios.git &amp;&amp; cd pickup-ios
+gh auth refresh -h github.com -s workflow &amp;&amp; bash scripts/enable_cloud_ipa_ci.sh</code></pre>
+                <span class="copy-wrap">
+                  <button type="button" class="copy-btn" data-copy-target="cmd-sidestore" aria-label="Copy cloud IPA workflow command">Copy Command ⧉</button>
+                  <span class="copy-status" role="status"></span>
+                </span>
+              </div>
+              <div class="hero-actions" style="margin: 0;">
+                <a class="btn-primary" href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">Download v1.0.0 on GitHub Releases ↗</a>
+                <a class="btn-ghost" href="https://github.com/smartlotus/pickup-ios" target="_blank" rel="noopener noreferrer">View Source Repo ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" id="inst-panel-sideloadly" aria-labelledby="inst-tab-sideloadly" hidden="until-found">
+            <div class="panel-inner">
+              <h3>Sideloadly (macOS / Windows): One-click install with any free Apple ID</h3>
+              <ol class="install-step-list">
+                <li>Open Sideloadly and connect your iPhone or iPad via USB (or Wi-Fi after first sync).</li>
+                <li>Drop your built <code>PickupIOS.ipa</code> into Sideloadly, enter your free Apple ID, and click Start.</li>
+                <li>Trust your developer profile under iOS Settings → General → VPN &amp; Device Management.</li>
+              </ol>
+              <div class="code-row">
+                <pre><code id="cmd-sideloadly">git clone https://github.com/smartlotus/pickup-ios.git &amp;&amp; cd pickup-ios
+./scripts/package_ipa.sh build/Build/Products/Release-iphoneos/Pickup.app dist/PickupIOS.ipa</code></pre>
+                <span class="copy-wrap">
+                  <button type="button" class="copy-btn" data-copy-target="cmd-sideloadly" aria-label="Copy Sideloadly packaging command">Copy Command ⧉</button>
+                  <span class="copy-status" role="status"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" id="inst-panel-xcode" aria-labelledby="inst-tab-xcode" hidden="until-found">
+            <div class="panel-inner">
+              <h3>Xcode Free Personal Team: Pre-generated project ready to open &amp; run</h3>
+              <ol class="install-step-list">
+                <li>Clone the repo, run <code>swift test</code> to verify all 14 <code>PickupCoreTests</code>, and open the pre-generated <code>PickupIOS.xcodeproj</code>.</li>
+                <li>Choose your free Personal Team in Signing &amp; Capabilities and customize <code>PRODUCT_BUNDLE_IDENTIFIER</code>.</li>
+                <li>Press Run to install directly onto your iPhone or iPad with full native Liquid Glass support.</li>
+              </ol>
+              <div class="code-row">
+                <pre><code id="cmd-xcode">git clone https://github.com/smartlotus/pickup-ios.git
+cd pickup-ios
+swift test &amp;&amp; open PickupIOS.xcodeproj</code></pre>
+                <span class="copy-wrap">
+                  <button type="button" class="copy-btn" data-copy-target="cmd-xcode" aria-label="Copy Xcode build command">Copy Command ⧉</button>
+                  <span class="copy-status" role="status"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="wrap reveal-section" id="faq" aria-labelledby="faq-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>06 / FREQUENT QUESTIONS</p>
+          <h2 class="section-title" id="faq-title">Frequently asked questions.</h2>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <article class="faq-item glass-panel">
+          <h3>
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-a1">
+              <span>What happens if my 7-day free sideload certificate expires?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div id="faq-a1" class="faq-panel" hidden>
+            <p>Your entries and media remain intact inside the app container as long as you do not uninstall the app—simply re-sign with the same Apple ID. Better yet, configure Scheduled External Backups in Data Vault to mirror snapshots automatically to Files or iCloud Drive.</p>
+          </div>
+        </article>
+
+        <article class="faq-item glass-panel">
+          <h3>
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-a2">
+              <span>Can I migrate directly between Android Pickup and Pickup for iOS?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div id="faq-a2" class="faq-panel" hidden>
+            <p>Yes—100% lossless round-trip compatibility. Pickup for iOS natively reads Android v2 <code>backup.json</code> + <code>media/</code> ZIP archives as well as legacy JSON arrays, and exports valid v2 ZIPs back to Android.</p>
+          </div>
+        </article>
+
+        <article class="faq-item glass-panel">
+          <h3>
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-a3">
+              <span>Does AI Hub ever upload my photos, Live Photos, or unapproved entries?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div id="faq-a3" class="faq-panel" hidden>
+            <p>Never. Before any request leaves your device, AI Hub displays a mandatory Privacy Disclosure Preview showing the exact matched record count, character count, and a strict <code>0 bytes media sent</code> guarantee.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <div class="footer-wordmark" aria-hidden="true">Pickup.</div>
+    <div class="footer-meta">
+      <span>© 2026 渚有潜 / Zhuyouqian · MIT License</span>
+      <div class="footer-links">
+        <a href="https://github.com/smartlotus/pickup-ios" target="_blank" rel="noopener noreferrer">GitHub Source ↗</a>
+        <a href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">Download IPA ↗</a>
+        <a href="index.html" lang="zh-CN" hreflang="zh-CN">中文版</a>
+        <a href="#main-content">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Native Top-Layer Cinema Modal -->
+  <dialog id="film-dialog" closedby="any" aria-labelledby="film-dialog-title">
+    <div class="dialog-surface">
+      <div class="dialog-head">
+        <h2 id="film-dialog-title">Pickup for iOS 26 · 60fps Showcase Film</h2>
+        <button type="button" class="dialog-close-btn" command="close" commandfor="film-dialog" autofocus aria-label="Close film modal">✕</button>
+      </div>
+      <video id="intro-video" class="cinema-video" controls playsinline preload="none" loading="lazy" width="1280" height="720" poster="assets/video-poster.png">
+        <source src="assets/pickup-ios-intro.mp4" type="video/mp4">
+      </video>
+      <div class="chapter-row" role="group" aria-label="Video chapters">
+        <button type="button" class="sim-mini-btn" data-chapter-time="0">00:00 Keep Moments</button>
+        <button type="button" class="sim-mini-btn" data-chapter-time="8">00:08 Liquid Glass</button>
+        <button type="button" class="sim-mini-btn" data-chapter-time="16">00:16 Red-Pen Timeline</button>
+        <button type="button" class="sim-mini-btn" data-chapter-time="24">00:24 AI &amp; Data Vault</button>
+        <button type="button" class="sim-mini-btn" data-chapter-time="32">00:32 Zero-Fee Install</button>
+      </div>
+      <details class="transcript-details">
+        <summary>View film transcript &amp; chapter notes</summary>
+        <p>00:00 Vintage memory dial sweeps to midnight as red ink circles the character 拾; 00:08 Monochrome and Purple Dark Liquid Glass refraction layers on iPhone and iPadOS; 00:16 Red-pen timeline dates and Revisit cross-time replies; 00:24 Zero-media AI Hub disclosure preview and AES-256-GCM encrypted vault backups; 00:32 Free sideloading via SideStore, Sideloadly, or Xcode Personal Team.</p>
+      </details>
+    </div>
+  </dialog>
+
+  <!-- Native Top-Layer Schema Inspection Modal -->
+  <dialog id="schema-dialog" closedby="any" aria-labelledby="schema-dialog-title">
+    <div class="dialog-surface">
+      <div class="dialog-head">
+        <h2 id="schema-dialog-title">pickup-portable-backup v2 &amp; .pickupvault Schema</h2>
+        <button type="button" class="dialog-close-btn" command="close" commandfor="schema-dialog" autofocus aria-label="Close schema modal">✕</button>
+      </div>
+      <pre class="vault-format-pre"><code>{
+  "format": "pickup-portable-backup",
+  "formatVersion": 2,
+  "exportedAt": "2026-11-17T22:30:00Z",
+  "entries": [
+    {
+      "id": "demo-1",
+      "content": "Took the long way home after work...",
+      "media": [{ "id": "m_01", "type": "motionPhoto", "path": "media/media_0000.jpg", "motionVideoPath": "media/media_0001.mov" }],
+      "songInfo": "Evening Breeze — Night Radio",
+      "comments": [{ "text": "Looking back, taking the detour was right.", "timestamp": "2026-11-17T20:48:00Z" }]
+    }
+  ],
+  "aiEntries": []
+}
+
+// .pickupvault Envelope (CryptoKit)
+{
+  "format": "pickup-ios-vault",
+  "version": 1,
+  "kdf": "pbkdf2-hmac-sha256",
+  "iterations": 80000
+}</code></pre>
+    </div>
+  </dialog>
+
+  <!-- Native Top-Layer Screenshot Lightbox Modal -->
+  <dialog id="lightbox-dialog" closedby="any" aria-labelledby="lightbox-title">
+    <div class="dialog-surface">
+      <div class="dialog-head">
+        <h2 id="lightbox-title">Screen Preview</h2>
+        <button type="button" class="dialog-close-btn" command="close" commandfor="lightbox-dialog" autofocus aria-label="Close screenshot preview">✕</button>
+      </div>
+      <img id="lightbox-img" class="lightbox-img" src="assets/icon.png" width="588" height="1278" alt="">
+    </div>
+  </dialog>
+</body>
+</html>
