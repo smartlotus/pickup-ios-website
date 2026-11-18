@@ -27,22 +27,22 @@ export const Scene1PocketWatch: React.FC = () => {
     config: { damping: 18, stiffness: 70 },
   });
 
-  const watchScale = interpolate(enter, [0, 1], [0.82, 1]) * interpolate(watchLift, [0, 1], [1.14, 0.92]);
+  const watchScale =
+    interpolate(enter, [0, 1], [0.82, 1]) * interpolate(watchLift, [0, 1], [1.14, 0.92]);
   const watchY = interpolate(watchLift, [0, 1], [85, -42]);
 
   // Second hand sweep: smooth sweep + crisp mechanical 4Hz escapement micro-pulse
-  const smoothDeg = (frame / 60) * 36; // Graceful cinematic sweep
+  const smoothDeg = (frame / 60) * 36;
   const tickStep = Math.floor(frame / 15);
   const tickFrac = (frame % 15) / 15;
   const escapementImpulse = Math.exp(-tickFrac * 6) * 1.4;
-  const secondAngle = smoothDeg + (tickStep % 2 === 0 ? escapementImpulse : -escapementImpulse * 0.5);
+  const secondAngle =
+    smoothDeg + (tickStep % 2 === 0 ? escapementImpulse : -escapementImpulse * 0.5);
   const minuteAngle = -35 + (frame / 300) * 18;
   const hourAngle = 295 + (frame / 300) * 3;
 
-  // Specular sweep across gold bezel
   const rimGlowDeg = interpolate(frame, [0, 300], [-35, 220]);
 
-  // Title + Red Pen reveal
   const brandOpacity = interpolate(frame, [42, 72], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
@@ -78,7 +78,7 @@ export const Scene1PocketWatch: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ opacity: exitOpacity }}>
-      <AuroraBackdrop monoMix={0.85} goldGlow={0.95} />
+      <AuroraBackdrop lightMix={0} />
 
       <div
         style={{
@@ -93,7 +93,7 @@ export const Scene1PocketWatch: React.FC = () => {
           paddingTop: 20,
         }}
       >
-        {/* Gold-Rimmed Vintage Pocket Watch */}
+        {/* Minimalist Monochrome Brushed-Steel Watch Dial */}
         <div
           style={{
             transform: `translateY(${watchY}px) scale(${watchScale})`,
@@ -103,16 +103,16 @@ export const Scene1PocketWatch: React.FC = () => {
         >
           <svg width="280" height="318" viewBox="0 0 280 318" style={{ overflow: 'visible' }}>
             <defs>
-              <linearGradient id="goldBezelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#E6CE97" />
-                <stop offset="35%" stopColor={BRAND_COLORS.gold} />
-                <stop offset="70%" stopColor="#8E723C" />
-                <stop offset="100%" stopColor="#DFC58B" />
+              <linearGradient id="steelBezelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor={BRAND_COLORS.ivory} />
+                <stop offset="35%" stopColor="#B8B7B0" />
+                <stop offset="70%" stopColor="#52524E" />
+                <stop offset="100%" stopColor={BRAND_COLORS.silver} />
               </linearGradient>
               <radialGradient id="dialGrad" cx="50%" cy="45%" r="58%">
-                <stop offset="0%" stopColor="#1B1917" />
-                <stop offset="75%" stopColor="#0C0B0A" />
-                <stop offset="100%" stopColor="#050505" />
+                <stop offset="0%" stopColor="#181817" />
+                <stop offset="75%" stopColor="#0C0C0B" />
+                <stop offset="100%" stopColor="#040404" />
               </radialGradient>
               <linearGradient
                 id="crystalGlint"
@@ -124,20 +124,20 @@ export const Scene1PocketWatch: React.FC = () => {
               >
                 <stop offset="0%" stopColor="rgba(255,255,255,0.28)" />
                 <stop offset="45%" stopColor="rgba(255,255,255,0.02)" />
-                <stop offset="100%" stopColor="rgba(197,168,106,0.14)" />
+                <stop offset="100%" stopColor="rgba(244,243,237,0.12)" />
               </linearGradient>
             </defs>
 
-            {/* Ambient Gold Halo */}
-            <circle cx="140" cy="176" r="126" fill="rgba(197,168,106,0.10)" />
+            {/* Ambient Alabaster Halo */}
+            <circle cx="140" cy="176" r="126" fill="rgba(244,243,237,0.05)" />
 
-            {/* Top Pocket Watch Bow Ring */}
+            {/* Top Watch Bow Ring */}
             <circle
               cx="140"
               cy="30"
               r="22"
               fill="none"
-              stroke="url(#goldBezelGrad)"
+              stroke="url(#steelBezelGrad)"
               strokeWidth="6"
             />
             {/* Winding Stem / Crown */}
@@ -147,23 +147,17 @@ export const Scene1PocketWatch: React.FC = () => {
               width="24"
               height="18"
               rx="4"
-              fill="url(#goldBezelGrad)"
+              fill="url(#steelBezelGrad)"
             />
-            <rect
-              x="133"
-              y="56"
-              width="14"
-              height="10"
-              fill="#9E824B"
-            />
+            <rect x="133" y="56" width="14" height="10" fill="#7A7972" />
 
-            {/* Outer Brushed Gold Case */}
+            {/* Outer Brushed Steel Case */}
             <circle
               cx="140"
               cy="176"
               r="114"
-              fill="url(#goldBezelGrad)"
-              stroke="rgba(255,255,255,0.35)"
+              fill="url(#steelBezelGrad)"
+              stroke="rgba(255,255,255,0.42)"
               strokeWidth="1.2"
             />
             {/* Inner Bezel Step */}
@@ -171,9 +165,9 @@ export const Scene1PocketWatch: React.FC = () => {
               cx="140"
               cy="176"
               r="102"
-              fill="#151310"
-              stroke="#A3864C"
-              strokeWidth="2"
+              fill="#121211"
+              stroke="#6E6D68"
+              strokeWidth="1.8"
             />
             {/* Obsidian Dial */}
             <circle cx="140" cy="176" r="97" fill="url(#dialGrad)" />
@@ -183,7 +177,7 @@ export const Scene1PocketWatch: React.FC = () => {
               cy="176"
               r="76"
               fill="none"
-              stroke="rgba(197,168,106,0.22)"
+              stroke="rgba(244,243,237,0.16)"
               strokeWidth="1"
             />
 
@@ -204,7 +198,7 @@ export const Scene1PocketWatch: React.FC = () => {
                   y1={y1}
                   x2={x2}
                   y2={y2}
-                  stroke={isHour ? BRAND_COLORS.goldSoft : 'rgba(244,243,237,0.35)'}
+                  stroke={isHour ? BRAND_COLORS.ivory : 'rgba(244,243,237,0.32)'}
                   strokeWidth={isHour ? 2.2 : 1}
                   strokeLinecap="round"
                 />
@@ -216,11 +210,11 @@ export const Scene1PocketWatch: React.FC = () => {
               x="140"
               y="142"
               textAnchor="middle"
-              fill={BRAND_COLORS.gold}
+              fill={BRAND_COLORS.muted}
               fontSize="9.5"
               letterSpacing="3.2"
               fontFamily={FONT_MONO}
-              opacity="0.88"
+              opacity="0.92"
             >
               PICKUP · MMXXVI
             </text>
@@ -231,7 +225,7 @@ export const Scene1PocketWatch: React.FC = () => {
               cy="214"
               r="18"
               fill="none"
-              stroke="rgba(197,168,106,0.28)"
+              stroke="rgba(244,243,237,0.24)"
               strokeWidth="1"
             />
             <line
@@ -239,7 +233,7 @@ export const Scene1PocketWatch: React.FC = () => {
               y1="214"
               x2={140 + Math.sin((secondAngle * 2 * Math.PI) / 180) * 14}
               y2={214 - Math.cos((secondAngle * 2 * Math.PI) / 180) * 14}
-              stroke={BRAND_COLORS.redPen}
+              stroke={BRAND_COLORS.silver}
               strokeWidth="1.4"
               strokeLinecap="round"
             />
@@ -270,18 +264,18 @@ export const Scene1PocketWatch: React.FC = () => {
               />
             </g>
 
-            {/* Sweeping Gold Second Hand */}
+            {/* Sweeping Silver Second Hand */}
             <g transform={`rotate(${secondAngle} 140 176)`}>
               <line
                 x1="140"
                 y1="196"
                 x2="140"
                 y2="92"
-                stroke={BRAND_COLORS.goldSoft}
+                stroke={BRAND_COLORS.silver}
                 strokeWidth="1.6"
                 strokeLinecap="round"
               />
-              <circle cx="140" cy="176" r="5" fill={BRAND_COLORS.gold} />
+              <circle cx="140" cy="176" r="5" fill={BRAND_COLORS.ivory} />
             </g>
 
             {/* Liquid Glass Watch Crystal Overlay */}
@@ -290,7 +284,7 @@ export const Scene1PocketWatch: React.FC = () => {
               cy="176"
               r="98"
               fill="url(#crystalGlint)"
-              stroke="rgba(255,255,255,0.18)"
+              stroke="rgba(255,255,255,0.20)"
               strokeWidth="1"
             />
           </svg>
@@ -305,7 +299,7 @@ export const Scene1PocketWatch: React.FC = () => {
             fontSize: 40,
             fontWeight: 600,
             letterSpacing: '0.12em',
-            color: BRAND_COLORS.goldSoft,
+            color: BRAND_COLORS.silver,
             marginBottom: 14,
           }}
         >
@@ -374,7 +368,7 @@ export const Scene1PocketWatch: React.FC = () => {
           >
             写给时间与日常的私人记忆胶囊 · iPhone &amp; iPad
           </div>
-          <LiquidGlassCapsule dotColor={BRAND_COLORS.gold} monoMix={0.85}>
+          <LiquidGlassCapsule dotColor={BRAND_COLORS.ivory} lightMix={0}>
             iOS 26 Liquid Glass · 本地私密留存
           </LiquidGlassCapsule>
         </div>

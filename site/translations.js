@@ -1,13 +1,13 @@
-/* Bilingual copy and authentic demo seed data for Pickup for iOS & iPadOS 26 */
+/* Bilingual copy and pure monochrome demo data for Pickup for iOS & iPadOS */
 window.PICKUP_DATA = {
   zh: {
     locale: 'zh-CN',
-    themeMono: '纯黑白',
-    themePurple: '紫夜深色',
-    themeSwitchedMono: '已切换至纯黑白 Monochrome 主题',
-    themeSwitchedPurple: '已切换至紫夜 Purple Dark 主题',
-    deviceSwitchedIphone: '已切换至 iPhone 17 Pro 液态玻璃视图',
-    deviceSwitchedIpad: '已切换至 iPad Pro Split-View 三栏视图',
+    schemeLabelDark: '墨黑毛玻璃',
+    schemeLabelLight: '素白毛玻璃',
+    schemeSwitchedDark: '已切换至墨黑透明毛玻璃',
+    schemeSwitchedLight: '已切换至素白透明毛玻璃',
+    deviceSwitchedIphone: '已切换至 iPhone 透明毛玻璃视图',
+    deviceSwitchedIpad: '已切换至 iPad Split-View 三栏视图',
     copied: '已复制到剪贴板',
     copyFailed: '请手动选中复制',
     searchEmpty: '没有找到匹配该条件的记忆片段',
@@ -31,15 +31,15 @@ window.PICKUP_DATA = {
     aiPreviewHeader: '发送前隐私披露预览 · 仅纯文本上下文',
     aiMediaZero: '0 bytes 媒体发送（图片、实况与视频绝不离开本机）',
     aiSimulatedAnswers: {
-      calm: '从你最近的几条日记来看，让你感到安稳与松弛的时刻，都带着「主动放慢」的质地：下班绕远路买回家的洋甘菊、窗边阳光斜移时逐渐变凉的咖啡，以及深夜听着雨声写下的句子。你很懂得用微小的感官锚点，帮自己把紧绷的一天重新理顺。',
-      songs: '这段时间陪着你的旋律大多偏安静与夜色感：《晚风 — 夜间电台》《晴天 — Acoustic Demo》《夜航船 — Lo-Fi Mix》和《Rainy Taxi》。音乐常常和你散步、独处阅读的片段绑在一起出现。',
-      summary: '本周共有 4 条新片段、3 次跨时间回看与 1 份置顶安全快照。高频主题集中在「散步」「深夜」「阅读」，整体情绪曲线从周初的略微疲惫逐渐转向松弛与沉静。'
+      calm: '从最近的几条日记来看，让你感到安稳与松弛的时刻，都带着「主动放慢」的质地：下班绕远路买回家的洋甘菊、窗边阳光斜移时逐渐变凉的咖啡，以及深夜听着雨声写下的句子。你很懂得用微小的感官锚点，帮自己把紧绷的一天重新理顺。',
+      songs: '这段时间陪着你的旋律大多偏安静与夜色感：《晚风 — 夜间电台》《晴天 — Acoustic Demo》《夜航船 — Lo-Fi Mix》与《Rainy Taxi》。音乐常常和你散步、独处阅读的片段绑在一起出现。',
+      summary: '本周共有 4 条新片段、3 次跨时间回看与 1 份置顶安全快照。高频主题集中在「散步」「深夜」「阅读」，整体情绪从周初的略微疲惫逐渐转向松弛与沉静。'
     },
     vaultStorageItems: [
-      { key: 'images', label: '照片与实况', bytesLabel: '18.4 MB', pct: 46, color: '#A78BFA' },
-      { key: 'videos', label: '片段视频', bytesLabel: '11.2 MB', pct: 28, color: '#7C4DFF' },
-      { key: 'backups', label: '本地备份快照', bytesLabel: '7.6 MB', pct: 19, color: '#C5A86A' },
-      { key: 'text', label: '日记 JSON & AI', bytesLabel: '2.8 MB', pct: 7, color: '#F46862' }
+      { key: 'images', label: '照片与实况', bytesLabel: '18.4 MB', pct: 46, color: 'light-dark(#111111, #F4F3ED)' },
+      { key: 'videos', label: '片段视频', bytesLabel: '11.2 MB', pct: 28, color: 'light-dark(#55544E, #B4B3AC)' },
+      { key: 'backups', label: '本地备份快照', bytesLabel: '7.6 MB', pct: 19, color: 'light-dark(#93928B, #787770)' },
+      { key: 'text', label: '日记 JSON & AI', bytesLabel: '2.8 MB', pct: 7, color: 'light-dark(#D94E48, #F46862)' }
     ],
     vaultFreqLabels: {
       '6h': '每 6 小时',
@@ -88,13 +88,6 @@ window.PICKUP_DATA = {
     },
     vaultSimulatedToast: '模拟备份完成：已生成 SHA-256 校验快照并写入「文件 App / iCloud Drive」外部目录',
     vaultSnapPrefix: 'pickup-manual-20261117',
-    filmChapters: [
-      { time: 0, label: '00:00 拾起日常' },
-      { time: 8, label: '00:08 液态玻璃质感' },
-      { time: 16, label: '00:16 红笔时间线与去留' },
-      { time: 24, label: '00:24 AI 披露与数据金库' },
-      { time: 32, label: '00:32 零成本免费装机' }
-    ],
     entries: [
       {
         id: 'demo-1',
@@ -109,8 +102,8 @@ window.PICKUP_DATA = {
         weather: '微风 18°C',
         song: '晚风 — 夜间电台',
         tags: ['散步', '花店'],
-        photoTitle: '转角花店的暖黄灯光',
-        photoGradient: 'linear-gradient(135deg, #2B213A 0%, #52396A 48%, #C5A86A 100%)',
+        photoTitle: '转角花店的昏黄灯光',
+        photoGradient: 'linear-gradient(135deg, #2C2C2A 0%, #1C1C1A 52%, #0E0E0D 100%)',
         content: '下班换了一条绕远的路。路过转角花店还亮着灯，挑了一束洋甘菊慢慢走回家。晚风把一天的紧绷都吹散了。',
         comments: [
           { time: '今天 20:48', text: '回头看，偶尔绕点远路是对的。' }
@@ -130,7 +123,7 @@ window.PICKUP_DATA = {
         song: '晴天 — Acoustic Demo',
         tags: ['阅读', '咖啡'],
         photoTitle: '斜移过书页的午后光线',
-        photoGradient: 'linear-gradient(135deg, #1E1C26 0%, #3E3654 55%, #F46862 100%)',
+        photoGradient: 'linear-gradient(135deg, #343431 0%, #1E1E1C 58%, #10100F 100%)',
         content: '在窗边读了几页书，咖啡渐渐凉掉，阳光从桌面这一头斜斜地移到了另一头。没有赶时间的一整个下午。',
         comments: [
           { time: '11月16日 21:05', text: '这一刻值得被红笔圈起来。' }
@@ -192,21 +185,21 @@ window.PICKUP_DATA = {
   },
   en: {
     locale: 'en',
-    themeMono: 'Monochrome',
-    themePurple: 'Purple Dark',
-    themeSwitchedMono: 'Switched to Monochrome theme',
-    themeSwitchedPurple: 'Switched to Purple Dark theme',
-    deviceSwitchedIphone: 'Switched to iPhone 17 Pro Liquid Glass view',
+    schemeLabelDark: 'Obsidian Glass',
+    schemeLabelLight: 'Paper Glass',
+    schemeSwitchedDark: 'Switched to Obsidian monochrome frosted glass',
+    schemeSwitchedLight: 'Switched to Paper monochrome frosted glass',
+    deviceSwitchedIphone: 'Switched to iPhone frosted-glass view',
     deviceSwitchedIpad: 'Switched to iPad Pro Split-View',
     copied: 'Copied to clipboard',
     copyFailed: 'Select text manually to copy',
     searchEmpty: 'No memories matched your filter or query',
-    liveBadge: 'LIVE · Motion Photo',
+    liveBadge: 'LIVE · Motion',
     livePlaying: 'Replaying 1.5s Live Photo clip…',
     pinAdded: 'Pinned memory',
     pinRemoved: 'Unpinned memory',
     repliesLabel: 'Reflections',
-    replyPlaceholder: 'Write a reply to your past self…',
+    replyPlaceholder: 'Reply to past self…',
     replyAdded: 'Saved new reflection to this memory',
     replyButton: 'Add Reply',
     revisitShuffled: 'Picked another past memory for you',
@@ -226,10 +219,10 @@ window.PICKUP_DATA = {
       summary: 'This week holds 4 new entries, 3 cross-time reflections, and 1 pinned safety snapshot. Frequent tags revolve around "walk", "reading", and "midnight", shifting gently from early-week tension into stillness.'
     },
     vaultStorageItems: [
-      { key: 'images', label: 'Photos & Live', bytesLabel: '18.4 MB', pct: 46, color: '#A78BFA' },
-      { key: 'videos', label: 'Video Clips', bytesLabel: '11.2 MB', pct: 28, color: '#7C4DFF' },
-      { key: 'backups', label: 'Local Snapshots', bytesLabel: '7.6 MB', pct: 19, color: '#C5A86A' },
-      { key: 'text', label: 'Entries & AI JSON', bytesLabel: '2.8 MB', pct: 7, color: '#F46862' }
+      { key: 'images', label: 'Photos & Live', bytesLabel: '18.4 MB', pct: 46, color: 'light-dark(#111111, #F4F3ED)' },
+      { key: 'videos', label: 'Video Clips', bytesLabel: '11.2 MB', pct: 28, color: 'light-dark(#55544E, #B4B3AC)' },
+      { key: 'backups', label: 'Local Snapshots', bytesLabel: '7.6 MB', pct: 19, color: 'light-dark(#93928B, #787770)' },
+      { key: 'text', label: 'Entries & AI JSON', bytesLabel: '2.8 MB', pct: 7, color: 'light-dark(#D94E48, #F46862)' }
     ],
     vaultFreqLabels: {
       '6h': 'Every 6 Hours',
@@ -278,13 +271,6 @@ window.PICKUP_DATA = {
     },
     vaultSimulatedToast: 'Simulated backup complete: SHA-256 verified snapshot written to Files / iCloud Drive folder',
     vaultSnapPrefix: 'pickup-manual-20261117',
-    filmChapters: [
-      { time: 0, label: '00:00 Keep the Little Things' },
-      { time: 8, label: '00:08 Liquid Glass Craft' },
-      { time: 16, label: '00:16 Red-Pen Timeline & Revisit' },
-      { time: 24, label: '00:24 AI Disclosure & Data Vault' },
-      { time: 32, label: '00:32 Zero-Fee Sideload' }
-    ],
     entries: [
       {
         id: 'demo-1',
@@ -300,7 +286,7 @@ window.PICKUP_DATA = {
         song: 'Evening Breeze — Night Radio',
         tags: ['walk', 'flowers'],
         photoTitle: 'Corner florist glowing after dusk',
-        photoGradient: 'linear-gradient(135deg, #2B213A 0%, #52396A 48%, #C5A86A 100%)',
+        photoGradient: 'linear-gradient(135deg, #2C2C2A 0%, #1C1C1A 52%, #0E0E0D 100%)',
         content: 'Took the long way home after work. The corner flower shop still had its warm lights on, so I picked up chamomile and walked back slowly in the cool breeze.',
         comments: [
           { time: 'Today 20:48', text: 'Looking back, taking the detour was the right call.' }
@@ -320,7 +306,7 @@ window.PICKUP_DATA = {
         song: 'Sunny Day — Acoustic Demo',
         tags: ['reading', 'coffee'],
         photoTitle: 'Sunlight drifting across the desk',
-        photoGradient: 'linear-gradient(135deg, #1E1C26 0%, #3E3654 55%, #F46862 100%)',
+        photoGradient: 'linear-gradient(135deg, #343431 0%, #1E1E1C 58%, #10100F 100%)',
         content: 'Read a few chapters by the window while my coffee cooled. Sunlight slid slowly from one corner of the desk to the other—an afternoon with nowhere to rush.',
         comments: [
           { time: 'Nov 16 21:05', text: 'Worth circling in red ink.' }

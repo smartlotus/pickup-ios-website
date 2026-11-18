@@ -30,7 +30,7 @@
   }
 
   /* -------------------------------------------------------------
-     1. View Transitions Helper (modern-web-guidance: same-document-transitions)
+     1. Same-Document View Transitions Helper (modern-web-guidance)
      ------------------------------------------------------------- */
   function runViewTransition(updateFn, cleanupTargets = [], focusTarget = null) {
     if (!document.startViewTransition || prefersReducedMotion()) {
@@ -56,47 +56,64 @@
   }
 
   /* -------------------------------------------------------------
-     2. Theme Switcher (Purple Dark <-> Monochrome)
+     2. Dark Mode Toggle (modern-web-guidance: dark-mode-toggle)
+        Switches cleanly between Obsidian Dark & Paper Light monochrome glass.
      ------------------------------------------------------------- */
+  const schemeMeta = document.querySelector('meta[name="color-scheme"]');
   const themeBtn = document.getElementById('theme-toggle');
-  const themeLabel = document.getElementById('theme-toggle-label');
 
-  function applyTheme(theme, persist = false) {
-    const valid = theme === 'mono' ? 'mono' : 'purple';
-    document.documentElement.dataset.theme = valid;
-    if (persist) {
-      try {
-        localStorage.setItem('pickup_theme', valid);
-      } catch (_) {}
-    }
+  function currentSystemScheme() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function getRenderedScheme() {
+    const c = schemeMeta ? schemeMeta.content : 'light dark';
+    if (c === 'dark' || c === 'light') return c;
+    return currentSystemScheme();
+  }
+
+  function syncThemeMetaAndButton() {
+    if (!schemeMeta) return;
+    let stored = null;
+    try {
+      stored = localStorage.getItem('color-scheme');
+    } catch (_) {}
+    schemeMeta.content = stored === 'dark' || stored === 'light' ? stored : 'light dark';
     if (themeBtn) {
-      themeBtn.setAttribute('aria-pressed', String(valid === 'mono'));
-    }
-    if (themeLabel) {
-      themeLabel.textContent = valid === 'mono' ? copy.themeMono : copy.themePurple;
+      themeBtn.setAttribute('aria-pressed', String(getRenderedScheme() === 'light'));
     }
   }
 
-  applyTheme(document.documentElement.dataset.theme || 'purple', false);
+  syncThemeMetaAndButton();
 
-  if (themeBtn) {
+  if (themeBtn && schemeMeta) {
     themeBtn.addEventListener('click', () => {
-      const next = document.documentElement.dataset.theme === 'mono' ? 'purple' : 'mono';
-      runViewTransition(() => {
-        applyTheme(next, true);
-        announce(next === 'mono' ? copy.themeSwitchedMono : copy.themeSwitchedPurple);
-      });
+      const target = getRenderedScheme() === 'dark' ? 'light' : 'dark';
+      const system = currentSystemScheme();
+      const apply = () => {
+        try {
+          if (target === system) {
+            localStorage.removeItem('color-scheme');
+          } else {
+            localStorage.setItem('color-scheme', target);
+          }
+        } catch (_) {}
+        schemeMeta.content = target === system ? 'light dark' : target;
+        themeBtn.setAttribute('aria-pressed', String(target === 'light'));
+        announce(target === 'dark' ? copy.schemeSwitchedDark : copy.schemeSwitchedLight);
+      };
+      runViewTransition(apply);
     });
   }
 
   window.addEventListener('storage', (event) => {
-    if (event.key === 'pickup_theme' && (event.newValue === 'mono' || event.newValue === 'purple')) {
-      applyTheme(event.newValue, false);
+    if (event.key === 'color-scheme') {
+      syncThemeMetaAndButton();
     }
   });
 
   /* -------------------------------------------------------------
-     3. Pointer Specular Lighting on Liquid Glass Panels
+     3. Subtle Pointer Specular Highlight on Glass Surfaces
      ------------------------------------------------------------- */
   if (matchMedia('(pointer: fine)').matches && !prefersReducedMotion()) {
     const glassCards = document.querySelectorAll('.glass-interactive');
@@ -119,33 +136,37 @@
   }
 
   /* -------------------------------------------------------------
-     4. Scroll-Driven Animation Fallbacks (modern-web-guidance)
+     4. Scroll-State Top Bar & Scroll-Progress Fallbacks
+        (content-first-noise-reduction + shrinking-header-on-scroll)
      ------------------------------------------------------------- */
+  const topBarEl = document.getElementById('top-bar');
+  if (!CSS.supports('container-type', 'scroll-state') && topBarEl) {
+    let lastY = scrollY;
+    addEventListener('scroll', () => {
+      const y = Math.max(0, Math.min(scrollY, document.documentElement.scrollHeight - innerHeight));
+      if (y === lastY) return;
+      topBarEl.classList.toggle('is-hidden', y > lastY && y > topBarEl.offsetHeight + 16);
+      lastY = y;
+    }, { passive: true });
+  }
+
   if (!CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')) {
     const progressEl = document.getElementById('scroll-progress');
-    const headerEl = document.getElementById('site-header');
-    let ticking = false;
-
-    const updateScrollFallback = () => {
-      ticking = false;
-      const scrollY = window.scrollY;
-      if (headerEl) {
-        headerEl.classList.toggle('is-scrolled', scrollY > 36);
-      }
-      if (progressEl && !prefersReducedMotion()) {
+    if (progressEl && !prefersReducedMotion()) {
+      let ticking = false;
+      const updateProgress = () => {
+        ticking = false;
         const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-        const pct = Math.min(1, Math.max(0, scrollY / scrollable));
-        progressEl.style.transform = `scaleX(${pct})`;
-      }
-    };
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(updateScrollFallback);
-      }
-    }, { passive: true });
-    updateScrollFallback();
+        progressEl.style.transform = `scaleX(${Math.min(1, Math.max(0, window.scrollY / scrollable))})`;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateProgress);
+        }
+      }, { passive: true });
+      updateProgress();
+    }
   }
 
   /* -------------------------------------------------------------
@@ -180,7 +201,7 @@
       if (animations.length > 0) {
         await Promise.race([
           Promise.allSettled(animations.map((a) => a.finished)),
-          new Promise((r) => setTimeout(r, 450))
+          new Promise((r) => setTimeout(r, 400))
         ]);
       }
       if (!dialog.hasAttribute('data-closing')) return;
@@ -189,8 +210,7 @@
     dialog.close();
   }
 
-  const allDialogs = document.querySelectorAll('dialog');
-  for (const dialog of allDialogs) {
+  for (const dialog of document.querySelectorAll('dialog')) {
     dialog.addEventListener('cancel', (event) => {
       event.preventDefault();
       closeTopLayer(dialog);
@@ -206,7 +226,6 @@
     });
   }
 
-  // Fallback for browsers lacking closedby="any"
   if (!('closedBy' in HTMLDialogElement.prototype)) {
     const isOutside = (e, dialog) => {
       const r = dialog.getBoundingClientRect();
@@ -225,13 +244,11 @@
     }
   }
 
-  // Fallback for browsers lacking Invoker Commands (command / commandfor)
   const hasNativeCommands = 'commandForElement' in HTMLButtonElement.prototype;
   for (const btn of document.querySelectorAll('button[command][commandfor]')) {
     const cmd = btn.getAttribute('command');
     const targetId = btn.getAttribute('commandfor');
     if (cmd === 'close') {
-      // Intercept close command in browsers lacking native top-layer exit transitions
       btn.addEventListener('click', (e) => {
         const target = document.getElementById(targetId);
         if (!target) return;
@@ -249,60 +266,30 @@
   }
 
   /* -------------------------------------------------------------
-     6. Cinema Modal Video & Lazy Media Fallback
-        (lazy-load-video-and-audio)
+     6. Cinema Dialog & Screenshot Lightbox
      ------------------------------------------------------------- */
   const filmDialog = document.getElementById('film-dialog');
   const introVideo = document.getElementById('intro-video');
 
-  if (!Object.hasOwn(HTMLMediaElement.prototype, 'loading') && introVideo) {
-    const mediaObserver = new IntersectionObserver((entries, observer) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        const media = entry.target;
-        if (media.dataset.poster) {
-          media.poster = media.dataset.poster;
-          delete media.dataset.poster;
-        }
-        observer.unobserve(media);
-      }
-    }, { rootMargin: '200px 0px' });
-
-    if (introVideo.hasAttribute('poster')) {
-      introVideo.dataset.poster = introVideo.getAttribute('poster');
-      introVideo.removeAttribute('poster');
-    }
-    mediaObserver.observe(introVideo);
-  }
-
-  function onFilmOpen() {
-    if (!introVideo) return;
-    if (introVideo.dataset.poster) {
-      introVideo.poster = introVideo.dataset.poster;
-      delete introVideo.dataset.poster;
-    }
-    introVideo.preload = 'metadata';
-    introVideo.muted = false;
-    introVideo.play().catch(() => {});
-  }
-
   if (filmDialog) {
     const openObserver = new MutationObserver(() => {
-      if (filmDialog.open) onFilmOpen();
+      if (filmDialog.open && introVideo) {
+        introVideo.preload = 'metadata';
+        introVideo.muted = false;
+        introVideo.play().catch(() => {});
+      }
     });
     openObserver.observe(filmDialog, { attributes: true, attributeFilter: ['open'] });
 
     for (const chBtn of filmDialog.querySelectorAll('[data-chapter-time]')) {
       chBtn.addEventListener('click', () => {
         if (!introVideo) return;
-        const sec = Number(chBtn.getAttribute('data-chapter-time') || 0);
-        introVideo.currentTime = sec;
+        introVideo.currentTime = Number(chBtn.getAttribute('data-chapter-time') || 0);
         introVideo.play().catch(() => {});
       });
     }
   }
 
-  // Screenshot Lightbox Modal
   const lightboxDialog = document.getElementById('lightbox-dialog');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxTitle = document.getElementById('lightbox-title');
@@ -327,23 +314,20 @@
   }
 
   /* -------------------------------------------------------------
-     7. Simulator State & Interactive Engine
+     7. Simulator Engine (5 Tabs + iPhone/iPad + Monochrome Glass)
      ------------------------------------------------------------- */
-  const initialEntries = JSON.parse(JSON.stringify(copy.entries));
-
   const state = {
     device: 'iphone',
     activeTab: 'journal',
     journalFilter: 'all',
     searchQuery: '',
-    entries: initialEntries,
+    entries: JSON.parse(JSON.stringify(copy.entries)),
     expandedReplies: new Set(['demo-1']),
     playingLiveId: null,
     selectedDay: 17,
     revisitId: 'demo-last-year',
     aiScope: 'intelligent',
     aiPromptKey: 'calm',
-    aiShowAnswer: true,
     vaultFreq: 'daily',
     vaultRetention: '7',
     vaultFormat: 'zip',
@@ -352,6 +336,7 @@
     lastBackupHash: '9f82c1e4a07b'
   };
 
+  const heroSection = document.getElementById('hero-section');
   const stage = document.getElementById('simulator-stage');
   const panelsStack = document.querySelector('.sim-panels-stack');
   const deviceTabs = Array.from(document.querySelectorAll('.device-tablist [role="tab"]'));
@@ -397,23 +382,24 @@
     }
   }
 
-  function switchDevice(nextDevice) {
-    if (!stage || state.device === nextDevice) return;
-    runViewTransition(() => {
-      state.device = nextDevice;
-      stage.dataset.device = nextDevice;
-      syncTabGroupAttributes(deviceTabs, nextDevice, 'data-device');
-      syncPanelLabelledBy();
-      renderInspector();
-      announce(nextDevice === 'ipad' ? copy.deviceSwitchedIpad : copy.deviceSwitchedIphone);
-    }, [{ el: stage, cls: 'is-vt-stage' }]);
-  }
-
   function syncPanelLabelledBy() {
     const prefix = state.device === 'ipad' ? 'ipad-tab-' : 'dock-tab-';
     for (const [key, panel] of Object.entries(simPanels)) {
       if (panel) panel.setAttribute('aria-labelledby', `${prefix}${key}`);
     }
+  }
+
+  function switchDevice(nextDevice) {
+    if (!stage || state.device === nextDevice) return;
+    runViewTransition(() => {
+      state.device = nextDevice;
+      stage.dataset.device = nextDevice;
+      if (heroSection) heroSection.dataset.device = nextDevice;
+      syncTabGroupAttributes(deviceTabs, nextDevice, 'data-device');
+      syncPanelLabelledBy();
+      renderInspector();
+      announce(nextDevice === 'ipad' ? copy.deviceSwitchedIpad : copy.deviceSwitchedIphone);
+    });
   }
 
   function switchSimTab(nextTab, withTransition = true) {
@@ -424,8 +410,7 @@
       syncTabGroupAttributes(ipadTabs, nextTab, 'data-sim-tab');
       for (const [key, panel] of Object.entries(simPanels)) {
         if (!panel) continue;
-        const active = key === nextTab;
-        if (active) {
+        if (key === nextTab) {
           panel.removeAttribute('hidden');
         } else {
           panel.setAttribute('hidden', 'until-found');
@@ -436,7 +421,7 @@
     };
 
     if (withTransition && state.activeTab !== nextTab) {
-      runViewTransition(apply, [{ el: panelsStack, cls: 'is-vt-screen' }]);
+      runViewTransition(apply);
     } else {
       apply();
     }
@@ -467,7 +452,7 @@
     });
   }
 
-  /* --- Tab 1: Journal Capture --- */
+  /* --- Journal Capture --- */
   const searchInput = document.getElementById('sim-search-input');
   const journalList = document.getElementById('sim-journal-list');
   const filterBtns = Array.from(document.querySelectorAll('[data-journal-filter]'));
@@ -527,7 +512,7 @@
 
       if (entry.hasPhoto) {
         const photoBox = el('div', 'entry-photo-preview');
-        photoBox.style.background = entry.photoGradient || 'linear-gradient(135deg, #2B213A, #7C4DFF)';
+        photoBox.style.background = entry.photoGradient || 'linear-gradient(135deg, #2C2C2A, #111110)';
         if (state.playingLiveId === entry.id) photoBox.classList.add('is-playing');
         photoBox.appendChild(el('span', 'entry-photo-title', entry.photoTitle || 'Photo'));
         if (entry.isLivePhoto) {
@@ -563,11 +548,7 @@
       actionsRow.appendChild(tagsWrap);
 
       const isExpanded = state.expandedReplies.has(entry.id);
-      const replyBtn = el(
-        'button',
-        'reply-expand-btn',
-        `${copy.repliesLabel} (${entry.comments.length})`
-      );
+      const replyBtn = el('button', 'reply-expand-btn', `${copy.repliesLabel} (${entry.comments.length})`);
       replyBtn.type = 'button';
       replyBtn.setAttribute('aria-expanded', String(isExpanded));
       replyBtn.addEventListener('click', () => {
@@ -582,8 +563,7 @@
         const thread = el('div', 'reply-thread');
         for (const comment of entry.comments) {
           const item = el('div', 'reply-item');
-          const t = el('time', null, comment.time);
-          item.appendChild(t);
+          item.appendChild(el('time', null, comment.time));
           item.appendChild(document.createTextNode(comment.text));
           thread.appendChild(item);
         }
@@ -638,7 +618,7 @@
     });
   }
 
-  /* --- Tab 2: Timeline Calendar --- */
+  /* --- Timeline Calendar --- */
   const calGrid = document.getElementById('sim-calendar-days');
   const timelineSelected = document.getElementById('sim-timeline-selected');
   const onThisDayBox = document.getElementById('sim-on-this-day');
@@ -659,15 +639,12 @@
     if (!calGrid || !timelineSelected) return;
     clearNode(calGrid);
     const recordedSet = new Set(copy.recordedDays);
-    // Nov 2026 starts on Sunday (offset 0); show days 1..30
     for (let day = 1; day <= 30; day++) {
       const hasEntry = recordedSet.has(day);
       const btn = el('button', hasEntry ? 'cal-day-btn has-entry' : 'cal-day-btn', String(day));
       btn.type = 'button';
       btn.setAttribute('aria-pressed', String(state.selectedDay === day));
-      if (hasEntry) {
-        btn.appendChild(makeRedPenSvg());
-      }
+      if (hasEntry) btn.appendChild(makeRedPenSvg());
       btn.addEventListener('click', () => {
         state.selectedDay = day;
         renderTimeline();
@@ -683,7 +660,7 @@
     } else {
       for (const entry of dayMatches) {
         const card = el('article', 'sim-entry-card');
-        card.appendChild(el('span', 'gold-kicker', `${copy.selectedDayLabel} · ${entry.dateLabel}`));
+        card.appendChild(el('span', 'mono-kicker', `${copy.selectedDayLabel} · ${entry.dateLabel}`));
         card.appendChild(el('p', 'entry-prose', entry.content));
         if (entry.song) card.appendChild(el('span', 'soundtrack-pill', `♪ ${entry.song}`));
         timelineSelected.appendChild(card);
@@ -693,12 +670,12 @@
     if (onThisDayBox) {
       clearNode(onThisDayBox);
       const echo = state.entries.find((e) => e.isOnThisDay) || state.entries[state.entries.length - 1];
-      onThisDayBox.appendChild(el('span', 'gold-kicker', copy.onThisDayBadge));
+      onThisDayBox.appendChild(el('span', 'mono-kicker', copy.onThisDayBadge));
       onThisDayBox.appendChild(el('p', 'entry-prose', echo.content));
     }
   }
 
-  /* --- Tab 3: Revisit --- */
+  /* --- Revisit --- */
   const revisitShuffleBtn = document.getElementById('sim-revisit-shuffle');
   const revisitCard = document.getElementById('sim-revisit-card');
   const revisitForm = document.getElementById('sim-revisit-form');
@@ -710,7 +687,7 @@
     const entry = state.entries.find((e) => e.id === state.revisitId) || state.entries[0];
 
     const head = el('div', 'entry-meta-row');
-    head.appendChild(el('span', 'gold-kicker', entry.dateLabel));
+    head.appendChild(el('span', 'mono-kicker', entry.dateLabel));
     const tags = el('div', 'entry-badges');
     if (entry.mood) tags.appendChild(el('span', 'badge-tag', entry.mood));
     if (entry.weather) tags.appendChild(el('span', 'badge-tag', entry.weather));
@@ -718,10 +695,7 @@
     revisitCard.appendChild(head);
 
     revisitCard.appendChild(el('p', 'entry-prose', entry.content));
-
-    if (entry.song) {
-      revisitCard.appendChild(el('span', 'soundtrack-pill', `♪ ${entry.song}`));
-    }
+    if (entry.song) revisitCard.appendChild(el('span', 'soundtrack-pill', `♪ ${entry.song}`));
 
     const thread = el('div', 'reply-thread');
     if (entry.comments.length === 0) {
@@ -763,7 +737,7 @@
     });
   }
 
-  /* --- Tab 4: AI Hub --- */
+  /* --- AI Hub --- */
   const aiScopeBtns = Array.from(document.querySelectorAll('[data-ai-scope]'));
   const aiPromptBtns = Array.from(document.querySelectorAll('[data-ai-prompt]'));
   const aiDisclosureBox = document.getElementById('sim-ai-disclosure');
@@ -781,7 +755,7 @@
     const pool = getAiMatchedPool();
     const textPayload = pool.map((e) => `[${e.isoDate}] ${e.content}`).join('\n');
 
-    aiDisclosureBox.appendChild(el('span', 'gold-kicker', copy.aiPreviewHeader));
+    aiDisclosureBox.appendChild(el('span', 'mono-kicker', copy.aiPreviewHeader));
     aiDisclosureBox.appendChild(el('div', 'ai-zero-badge', copy.aiMediaZero));
 
     const metaGrid = el('div', 'ai-meta-grid');
@@ -795,9 +769,7 @@
     metaGrid.appendChild(b2);
     aiDisclosureBox.appendChild(metaGrid);
 
-    const preview = el('pre', 'vault-format-pre', textPayload.slice(0, 175) + (textPayload.length > 175 ? '…' : ''));
-    aiDisclosureBox.appendChild(preview);
-
+    aiDisclosureBox.appendChild(el('pre', 'vault-format-pre', textPayload.slice(0, 175) + (textPayload.length > 175 ? '…' : '')));
     aiAnswerBox.textContent = copy.aiSimulatedAnswers[state.aiPromptKey] || copy.aiSimulatedAnswers.calm;
   }
 
@@ -818,7 +790,7 @@
     });
   }
 
-  /* --- Tab 5: Data Vault --- */
+  /* --- Data Vault --- */
   const storageRingSvg = document.getElementById('sim-storage-ring');
   const storageLegend = document.getElementById('sim-storage-legend');
   const vaultFreqBtns = Array.from(document.querySelectorAll('[data-vault-freq]'));
@@ -843,17 +815,26 @@
       const circumference = 2 * Math.PI * radius;
       let offset = 0;
 
+      // Subtle track ring in monochrome stroke
+      const track = document.createElementNS(ns, 'circle');
+      track.setAttribute('cx', '60');
+      track.setAttribute('cy', '60');
+      track.setAttribute('r', String(radius));
+      track.setAttribute('stroke', 'currentColor');
+      track.setAttribute('opacity', '0.12');
+      storageRingSvg.appendChild(track);
+
       for (const item of copy.vaultStorageItems) {
         const dash = (item.pct / 100) * circumference;
         const circle = document.createElementNS(ns, 'circle');
         circle.setAttribute('cx', '60');
         circle.setAttribute('cy', '60');
         circle.setAttribute('r', String(radius));
-        circle.setAttribute('stroke', item.color);
+        circle.style.stroke = item.color;
         circle.setAttribute('stroke-dasharray', `${dash} ${circumference - dash}`);
         circle.setAttribute('stroke-dashoffset', String(-offset));
         circle.setAttribute('transform', 'rotate(-90 60 60)');
-        circle.setAttribute('class', state.vaultActiveSlice === item.key ? 'ring-segment is-active' : 'ring-segment');
+        circle.setAttribute('opacity', state.vaultActiveSlice === item.key ? '1' : '0.68');
         circle.addEventListener('click', () => {
           state.vaultActiveSlice = item.key;
           renderDataVault();
@@ -883,9 +864,10 @@
       centerText.setAttribute('x', '60');
       centerText.setAttribute('y', '64');
       centerText.setAttribute('text-anchor', 'middle');
-      centerText.setAttribute('fill', '#F4F3ED');
-      centerText.setAttribute('font-size', '14');
-      centerText.setAttribute('font-weight', '700');
+      centerText.setAttribute('fill', 'currentColor');
+      centerText.setAttribute('stroke', 'none');
+      centerText.setAttribute('font-size', '13');
+      centerText.setAttribute('font-weight', '600');
       centerText.textContent = '40 MB';
       storageRingSvg.appendChild(centerText);
     }
@@ -940,7 +922,7 @@
     });
   }
 
-  /* --- iPad Right Inspector Rail --- */
+  /* --- iPad Right Inspector --- */
   const inspectorContent = document.getElementById('sim-inspector-content');
 
   function renderInspector() {
@@ -948,7 +930,7 @@
     clearNode(inspectorContent);
 
     const card1 = el('div', 'inspector-box');
-    card1.appendChild(el('span', 'gold-kicker', lang === 'zh' ? '实时状态检查器' : 'LIVE INSPECTOR'));
+    card1.appendChild(el('span', 'mono-kicker', lang === 'zh' ? '实时状态检查器' : 'LIVE INSPECTOR'));
     if (state.activeTab === 'journal') {
       const top = getFilteredEntries()[0] || state.entries[0];
       card1.appendChild(el('h3', null, top.photoTitle || top.dateLabel));
@@ -969,7 +951,7 @@
     }
 
     const card2 = el('div', 'inspector-box');
-    card2.appendChild(el('span', 'gold-kicker', lang === 'zh' ? '本地主权指标' : 'SOVEREIGNTY'));
+    card2.appendChild(el('span', 'mono-kicker', lang === 'zh' ? '本地主权指标' : 'SOVEREIGNTY'));
     card2.appendChild(el('p', null, lang === 'zh'
       ? '支持 ⌘1–⌘5 快捷切换视图、AES-256-GCM 加密保险箱及 Android v2 ZIP 双向无损迁移。'
       : 'Supports ⌘1–⌘5 view switching, AES-256-GCM encrypted vault, and lossless Android v2 ZIP sync.'));
@@ -1000,7 +982,6 @@
     });
   }
 
-  // Initial Simulator Hydration
   renderJournal();
   renderTimeline();
   renderRevisit();
@@ -1010,7 +991,7 @@
   syncPanelLabelledBy();
 
   /* -------------------------------------------------------------
-     8. Install Hub 3-Tab Switcher & Copy Command Buttons
+     8. Install Sideload 3-Tab Switcher & Copy Command
      ------------------------------------------------------------- */
   const installTabs = Array.from(document.querySelectorAll('.install-tablist [role="tab"]'));
   const installPanels = Array.from(document.querySelectorAll('.install-panels [role="tabpanel"]'));
@@ -1026,8 +1007,7 @@
       }
     }
     for (const panel of installPanels) {
-      const isMatch = panel.id === `inst-panel-${key}`;
-      if (isMatch) {
+      if (panel.id === `inst-panel-${key}`) {
         panel.removeAttribute('hidden');
       } else {
         panel.setAttribute('hidden', 'until-found');
@@ -1089,20 +1069,6 @@
         }, 2400);
       }
       announce(msg);
-    });
-  }
-
-  /* -------------------------------------------------------------
-     9. FAQ Accessible Accordions
-     ------------------------------------------------------------- */
-  for (const faqBtn of document.querySelectorAll('.faq-trigger')) {
-    faqBtn.addEventListener('click', () => {
-      const panelId = faqBtn.getAttribute('aria-controls');
-      const panel = panelId ? document.getElementById(panelId) : null;
-      if (!panel) return;
-      const expanded = faqBtn.getAttribute('aria-expanded') === 'true';
-      faqBtn.setAttribute('aria-expanded', String(!expanded));
-      panel.hidden = expanded;
     });
   }
 })();

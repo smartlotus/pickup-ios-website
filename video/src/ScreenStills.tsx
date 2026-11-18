@@ -13,10 +13,13 @@ const PHONE_BASE_H = 674;
 const IPAD_BASE_W = 852;
 const IPAD_BASE_H = 638;
 
-const ScaledPhone: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ScaledPhone: React.FC<{
+  children: React.ReactNode;
+  background?: string;
+}> = ({ children, background = '#080808' }) => {
   const scale = 588 / PHONE_BASE_W; // -> 588 x 1278
   return (
-    <div style={{ width: 588, height: 1278, overflow: 'hidden', background: '#060606' }}>
+    <div style={{ width: 588, height: 1278, overflow: 'hidden', background }}>
       <div
         style={{
           width: PHONE_BASE_W,
@@ -31,10 +34,13 @@ const ScaledPhone: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
-const ScaledIpad: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ScaledIpad: React.FC<{
+  children: React.ReactNode;
+  background?: string;
+}> = ({ children, background = '#080808' }) => {
   const scale = 1366 / IPAD_BASE_W; // -> 1366 x 1024
   return (
-    <div style={{ width: 1366, height: 1024, overflow: 'hidden', background: '#0D0C12' }}>
+    <div style={{ width: 1366, height: 1024, overflow: 'hidden', background }}>
       <div
         style={{
           width: IPAD_BASE_W,
@@ -50,37 +56,37 @@ const ScaledIpad: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 export const StillIphoneJournal: React.FC = () => (
-  <ScaledPhone>
-    <FallbackJournalScreen monoMix={0} />
+  <ScaledPhone background="#080808">
+    <FallbackJournalScreen lightMode={false} />
   </ScaledPhone>
 );
 
 export const StillIphoneTimeline: React.FC = () => (
-  <ScaledPhone>
+  <ScaledPhone background="#080808">
     <FallbackTimelineScreen localFrame={90} />
   </ScaledPhone>
 );
 
 export const StillIphoneRevisit: React.FC = () => (
-  <ScaledPhone>
+  <ScaledPhone background="#080808">
     <FallbackRevisitScreen />
   </ScaledPhone>
 );
 
 export const StillIphoneDataVault: React.FC = () => (
-  <ScaledPhone>
+  <ScaledPhone background="#080808">
     <FallbackDataVaultScreen />
   </ScaledPhone>
 );
 
 export const StillIphoneMono: React.FC = () => (
-  <ScaledPhone>
-    <FallbackJournalScreen monoMix={1} />
+  <ScaledPhone background="#F5F4EF">
+    <FallbackJournalScreen lightMode={true} />
   </ScaledPhone>
 );
 
 export const StillIpadSplitView: React.FC = () => (
-  <ScaledIpad>
-    <FallbackIPadSplitScreen monoMix={0} />
+  <ScaledIpad background="#080808">
+    <FallbackIPadSplitScreen lightMode={false} />
   </ScaledIpad>
 );

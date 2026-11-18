@@ -12,46 +12,41 @@ export const SCENES = {
 } as const;
 
 export const MONO_PALETTE = {
-  background: '#060606',
-  secondaryBackground: '#0C0C0C',
-  cardSurface: '#111111',
-  elevatedSurface: '#191919',
+  background: '#080808',
+  secondaryBackground: '#0E0E0E',
+  cardSurface: 'rgba(255, 255, 255, 0.055)',
+  elevatedSurface: 'rgba(255, 255, 255, 0.09)',
   accent: '#F4F3ED',
-  secondaryAccent: 'rgba(255, 255, 255, 0.75)',
+  secondaryAccent: 'rgba(244, 243, 237, 0.72)',
   primaryText: '#F4F3ED',
   secondaryText: '#A2A19A',
   tertiaryText: '#6E6D68',
   hairline: 'rgba(255, 255, 255, 0.14)',
 } as const;
 
-export const PURPLE_PALETTE = {
-  background: '#0D0C12',
-  secondaryBackground: '#14121D',
-  cardSurface: '#1B1924',
-  elevatedSurface: '#242031',
-  accent: '#A78BFA',
-  secondaryAccent: '#7C4DFF',
-  primaryText: '#F4F3ED',
-  secondaryText: '#B3AFC0',
-  tertiaryText: '#7A758B',
-  hairline: 'rgba(167, 139, 250, 0.22)',
+export const LIGHT_MONO_PALETTE = {
+  background: '#F5F4EF',
+  secondaryBackground: '#ECEBE4',
+  cardSurface: 'rgba(255, 255, 255, 0.68)',
+  elevatedSurface: 'rgba(255, 255, 255, 0.86)',
+  accent: '#111111',
+  secondaryAccent: 'rgba(17, 17, 17, 0.72)',
+  primaryText: '#111111',
+  secondaryText: '#5C5B55',
+  tertiaryText: '#8A8880',
+  hairline: 'rgba(17, 17, 17, 0.11)',
 } as const;
 
 export const BRAND_COLORS = {
+  obsidian: '#080808',
+  paperLight: '#F5F4EF',
   ivory: '#F4F3ED',
+  silver: '#D8D7D0',
+  ink: '#111111',
   muted: '#A2A19A',
-  mutedPurple: '#B3AFC0',
-  obsidian: '#060606',
-  obsidianSoft: '#080808',
-  purpleDarkBg: '#0D0C12',
-  purpleSurface: '#121212',
-  purpleDeep: '#1B1924',
-  purplePrimary: '#7C4DFF',
-  purpleLight: '#A78BFA',
+  mutedLight: '#5C5B55',
+  subtle: '#6E6D68',
   redPen: '#F46862',
-  gold: '#C5A86A',
-  goldSoft: '#DFC58B',
-  emeraldSafe: '#58D68D',
 } as const;
 
 export const FONT_SERIF =

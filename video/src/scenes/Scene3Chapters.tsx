@@ -38,7 +38,7 @@ const CHAPTERS: ChapterSpec[] = [
     indexLabel: '01',
     title: '日记 Capture',
     subtitle: '实况照片 Live Photo + 此刻配乐 Soundtrack',
-    accent: BRAND_COLORS.purpleLight,
+    accent: BRAND_COLORS.ivory,
     tags: ['Live Photo 3.0s', '此刻在听', '手绘涂鸦', '本机草稿自动存'],
     detailBody:
       '写下当下的念头、添一张会动的实况照片，并把耳机里正在播放的那首歌一并封存进日记卡片。',
@@ -48,7 +48,7 @@ const CHAPTERS: ChapterSpec[] = [
     indexLabel: '02',
     title: '时间线 Timeline',
     subtitle: '红笔圈起有迹之日 · 往昔同日 On This Day',
-    accent: BRAND_COLORS.redPen,
+    accent: BRAND_COLORS.ivory,
     tags: ['手绘红笔圈点', '连续记录计数', '往昔同日回响', '情绪天气检索'],
     detailBody:
       '翻开月历，每一个留过文字的日子都被温润的朱红笔迹轻轻圈起；往年今日的旧片段自动浮现。',
@@ -58,7 +58,7 @@ const CHAPTERS: ChapterSpec[] = [
     indexLabel: '03',
     title: '去留 Revisit',
     subtitle: '每日偶遇旧日 · 给当时的自己留一句话',
-    accent: BRAND_COLORS.goldSoft,
+    accent: BRAND_COLORS.silver,
     tags: ['今日偶遇卡片', '跨时空回复', '随机重温旧梦', '置顶星标收藏'],
     detailBody:
       '每天在“去留”里随机偶遇一条旧日瞬间，写下一条新的回看回应，与过去的自己轻轻对话。',
@@ -68,7 +68,7 @@ const CHAPTERS: ChapterSpec[] = [
     indexLabel: '04',
     title: 'AI Hub',
     subtitle: '仅确认披露预览后发送文字 · 媒体字节零外传',
-    accent: BRAND_COLORS.emeraldSafe,
+    accent: BRAND_COLORS.ivory,
     tags: ['显式披露预览', '0 bytes 媒体发送', 'DeepSeek / Gemini', '本地密钥直连'],
     detailBody:
       '每次调用前必经透明披露确认面板：清晰展示发送的文字条数与字符数，严格承诺绝不上传任何照片与视频。',
@@ -110,7 +110,7 @@ export const Scene3Chapters: React.FC = () => {
         <SafeScreenImage
           screenPath="screens/iphone-journal.png"
           alt="Pickup Journal"
-          fallback={<FallbackJournalScreen monoMix={0} />}
+          fallback={<FallbackJournalScreen lightMode={false} />}
         />
       );
     }
@@ -137,7 +137,7 @@ export const Scene3Chapters: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ opacity: enterOpacity * exitOpacity }}>
-      <AuroraBackdrop monoMix={0.12} goldGlow={activeIdx === 2 ? 0.45 : 0.1} />
+      <AuroraBackdrop lightMix={0} />
 
       <div
         style={{
@@ -160,7 +160,7 @@ export const Scene3Chapters: React.FC = () => {
           }}
         >
           <div>
-            <LiquidGlassCapsule dotColor={chapter.accent}>
+            <LiquidGlassCapsule dotColor={chapter.accent} lightMix={0}>
               Four Everyday Chapters · 四重日常篇章
             </LiquidGlassCapsule>
             <div
@@ -186,9 +186,9 @@ export const Scene3Chapters: React.FC = () => {
                     padding: '10px 18px',
                     borderRadius: 999,
                     backgroundColor: active
-                      ? `${ch.accent}2A`
-                      : 'rgba(255,255,255,0.05)',
-                    border: `1px solid ${active ? ch.accent : 'rgba(255,255,255,0.12)'}`,
+                      ? 'rgba(244,243,237,0.14)'
+                      : 'rgba(255,255,255,0.04)',
+                    border: `1px solid ${active ? 'rgba(244,243,237,0.38)' : 'rgba(255,255,255,0.12)'}`,
                     fontFamily: FONT_SANS,
                     fontSize: 15,
                     fontWeight: active ? 600 : 400,
@@ -213,7 +213,7 @@ export const Scene3Chapters: React.FC = () => {
         >
           {/* Left Main Spotlight Card */}
           <LiquidGlassCard
-            highlightColor={chapter.accent}
+            lightMix={0}
             radius={32}
             style={{
               flex: 1.62,
@@ -236,7 +236,7 @@ export const Scene3Chapters: React.FC = () => {
                   flexShrink: 0,
                 }}
               >
-                <IPhoneBezel width={316} height={646} accentColor={chapter.accent}>
+                <IPhoneBezel width={316} height={646}>
                   {renderSpotlightPhone()}
                 </IPhoneBezel>
               </div>
@@ -256,7 +256,7 @@ export const Scene3Chapters: React.FC = () => {
                     fontFamily: FONT_MONO,
                     fontSize: 15,
                     letterSpacing: '0.18em',
-                    color: chapter.accent,
+                    color: BRAND_COLORS.muted,
                   }}
                 >
                   CHAPTER {chapter.indexLabel}
@@ -279,7 +279,7 @@ export const Scene3Chapters: React.FC = () => {
                     fontFamily: FONT_SANS,
                     fontSize: 21,
                     fontWeight: 500,
-                    color: chapter.accent,
+                    color: BRAND_COLORS.silver,
                   }}
                 >
                   {chapter.subtitle}
@@ -290,32 +290,52 @@ export const Scene3Chapters: React.FC = () => {
                     fontFamily: FONT_SANS,
                     fontSize: 19,
                     lineHeight: 1.7,
-                    color: BRAND_COLORS.mutedPurple,
+                    color: BRAND_COLORS.muted,
                   }}
                 >
                   {chapter.detailBody}
                 </div>
 
-                {/* Chapter-specific dynamic widget preview */}
+                {/* Chapter-specific dynamic frosted widget preview */}
                 <div
                   style={{
                     padding: '18px 22px',
                     borderRadius: 20,
-                    backgroundColor: 'rgba(10, 9, 15, 0.56)',
-                    border: `1px solid ${chapter.accent}44`,
+                    backgroundColor: 'rgba(255, 255, 255, 0.045)',
+                    border: '1px solid rgba(255, 255, 255, 0.16)',
                   }}
                 >
                   {activeIdx === 0 && (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
                       <div>
                         <div style={{ fontSize: 13, color: BRAND_COLORS.muted }}>
                           实时音画封装
                         </div>
-                        <div style={{ fontSize: 17, color: BRAND_COLORS.ivory, marginTop: 4, fontWeight: 600 }}>
+                        <div
+                          style={{
+                            fontSize: 17,
+                            color: BRAND_COLORS.ivory,
+                            marginTop: 4,
+                            fontWeight: 600,
+                          }}
+                        >
                           ♪ 落日飞车 - My Jinji · LIVE 实况
                         </div>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4, height: 28 }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'flex-end',
+                          gap: 4,
+                          height: 28,
+                        }}
+                      >
                         {[14, 24, 18, 28, 16, 22].map((h, i) => (
                           <div
                             key={i}
@@ -324,7 +344,7 @@ export const Scene3Chapters: React.FC = () => {
                               height:
                                 10 + Math.abs(Math.sin(localFrame * 0.18 + i)) * (h - 8),
                               borderRadius: 2,
-                              backgroundColor: BRAND_COLORS.purpleLight,
+                              backgroundColor: BRAND_COLORS.ivory,
                             }}
                           />
                         ))}
@@ -334,19 +354,44 @@ export const Scene3Chapters: React.FC = () => {
 
                   {activeIdx === 1 && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-                      <div style={{ position: 'relative', width: 54, height: 54, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ fontFamily: FONT_SERIF, fontSize: 22, fontWeight: 700, color: BRAND_COLORS.ivory }}>
+                      <div
+                        style={{
+                          position: 'relative',
+                          width: 54,
+                          height: 54,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: FONT_SERIF,
+                            fontSize: 22,
+                            fontWeight: 700,
+                            color: BRAND_COLORS.ivory,
+                          }}
+                        >
                           17
                         </span>
                         <RedPenCircle
-                          progress={interpolate(localFrame, [10, 65], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}
+                          progress={interpolate(localFrame, [10, 65], [0, 1], {
+                            extrapolateLeft: 'clamp',
+                            extrapolateRight: 'clamp',
+                          })}
                           size={54}
                           strokeWidth={4.5}
                           style={{ position: 'absolute', inset: 0 }}
                         />
                       </div>
                       <div>
-                        <div style={{ fontSize: 16, fontWeight: 600, color: BRAND_COLORS.ivory }}>
+                        <div
+                          style={{
+                            fontSize: 16,
+                            fontWeight: 600,
+                            color: BRAND_COLORS.ivory,
+                          }}
+                        >
                           连续记录 18 天 · 记忆回响已触发
                         </div>
                         <div style={{ fontSize: 13, color: BRAND_COLORS.muted, marginTop: 3 }}>
@@ -358,22 +403,53 @@ export const Scene3Chapters: React.FC = () => {
 
                   {activeIdx === 2 && (
                     <div>
-                      <div style={{ fontSize: 12, color: BRAND_COLORS.goldSoft, marginBottom: 4 }}>
+                      <div
+                        style={{
+                          fontSize: 12,
+                          color: BRAND_COLORS.silver,
+                          marginBottom: 4,
+                        }}
+                      >
                         来自 365 天后的回应
                       </div>
-                      <div style={{ fontFamily: FONT_SERIF, fontSize: 17, color: BRAND_COLORS.ivory }}>
+                      <div
+                        style={{
+                          fontFamily: FONT_SERIF,
+                          fontSize: 17,
+                          color: BRAND_COLORS.ivory,
+                        }}
+                      >
                         “一年后的我依然会被热乎乎的面包治愈，谢谢当时认真记录的自己。”
                       </div>
                     </div>
                   )}
 
                   {activeIdx === 3 && (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
                       <div>
-                        <div style={{ fontSize: 15, fontWeight: 700, color: BRAND_COLORS.emeraldSafe }}>
+                        <div
+                          style={{
+                            fontSize: 15,
+                            fontWeight: 700,
+                            color: BRAND_COLORS.ivory,
+                          }}
+                        >
                           ✓ 隐私披露预览已就绪 · Text-Only
                         </div>
-                        <div style={{ fontFamily: FONT_MONO, fontSize: 13, color: BRAND_COLORS.muted, marginTop: 5 }}>
+                        <div
+                          style={{
+                            fontFamily: FONT_MONO,
+                            fontSize: 13,
+                            color: BRAND_COLORS.muted,
+                            marginTop: 5,
+                          }}
+                        >
                           12 条文字 (1,840 chars) · 媒体字节：0 bytes
                         </div>
                       </div>
@@ -381,10 +457,9 @@ export const Scene3Chapters: React.FC = () => {
                         style={{
                           padding: '8px 14px',
                           borderRadius: 999,
-                          backgroundColor: `${BRAND_COLORS.emeraldSafe}22`,
-                          border: `1px solid ${BRAND_COLORS.emeraldSafe}66`,
+                          backgroundColor: BRAND_COLORS.ivory,
                           fontSize: 13,
-                          color: BRAND_COLORS.emeraldSafe,
+                          color: BRAND_COLORS.obsidian,
                           fontWeight: 600,
                         }}
                       >
@@ -403,7 +478,7 @@ export const Scene3Chapters: React.FC = () => {
                         padding: '7px 14px',
                         borderRadius: 999,
                         backgroundColor: 'rgba(255,255,255,0.06)',
-                        border: '1px solid rgba(255,255,255,0.12)',
+                        border: '1px solid rgba(255,255,255,0.14)',
                         fontFamily: FONT_SANS,
                         fontSize: 14,
                         color: BRAND_COLORS.ivory,
@@ -437,13 +512,13 @@ export const Scene3Chapters: React.FC = () => {
               return (
                 <LiquidGlassCard
                   key={item.id}
+                  lightMix={0}
                   radius={24}
-                  highlightColor={isActive ? item.accent : undefined}
                   refractiveGlow={isActive}
                   style={{
                     flex: isActive ? 1.25 : 0.92,
                     padding: '22px 26px',
-                    opacity: isActive ? 1 : 0.62,
+                    opacity: isActive ? 1 : 0.54,
                     transform: `scale(${isActive ? 1 : 0.985})`,
                   }}
                 >
@@ -466,7 +541,7 @@ export const Scene3Chapters: React.FC = () => {
                         style={{
                           fontFamily: FONT_MONO,
                           fontSize: 13,
-                          color: isActive ? item.accent : BRAND_COLORS.muted,
+                          color: isActive ? BRAND_COLORS.ivory : BRAND_COLORS.muted,
                           letterSpacing: '0.14em',
                         }}
                       >
@@ -477,8 +552,10 @@ export const Scene3Chapters: React.FC = () => {
                           width: 10,
                           height: 10,
                           borderRadius: '50%',
-                          backgroundColor: isActive ? item.accent : 'rgba(255,255,255,0.18)',
-                          boxShadow: isActive ? `0 0 12px ${item.accent}` : 'none',
+                          backgroundColor: isActive
+                            ? BRAND_COLORS.ivory
+                            : 'rgba(255,255,255,0.18)',
+                          boxShadow: isActive ? '0 0 10px rgba(244,243,237,0.45)' : 'none',
                         }}
                       />
                     </div>
@@ -498,7 +575,7 @@ export const Scene3Chapters: React.FC = () => {
                         style={{
                           fontFamily: FONT_SANS,
                           fontSize: 15,
-                          color: isActive ? BRAND_COLORS.mutedPurple : BRAND_COLORS.muted,
+                          color: isActive ? BRAND_COLORS.silver : BRAND_COLORS.muted,
                           marginTop: 6,
                         }}
                       >
@@ -519,7 +596,7 @@ export const Scene3Chapters: React.FC = () => {
                         style={{
                           width: `${progressPct}%`,
                           height: '100%',
-                          backgroundColor: item.accent,
+                          backgroundColor: BRAND_COLORS.ivory,
                           borderRadius: 999,
                         }}
                       />

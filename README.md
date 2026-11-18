@@ -10,7 +10,7 @@ Official bilingual showcase website for **Pickup for iOS 26 & iPadOS**, engineer
 
 - `site/index.html` — 中文主站（无需 JavaScript 亦可完整阅读）
 - `site/en.html` — English showcase (`<html lang="en">`)
-- `site/style.css` — Purple Dark & Monochrome 双主题、SVG 折射滤镜、Scroll-Driven Animations、View Transitions、`@starting-style` 顶层弹窗与强制高对比度适配
+- `site/style.css` — 墨黑毛玻璃 (Obsidian) & 素白毛玻璃 (Paper) 纯黑白透明毛玻璃双外观、SVG 折射滤镜、Scroll-Driven Animations、View Transitions、`@starting-style` 顶层弹窗与强制高对比度适配
 - `site/translations.js` — 中英双语静态演示词条、AI 披露上下文、存储分布与影院章节数据
 - `site/app.js` — 渐进增强交互引擎（双设备切换、5 大模拟器标签页、实时写入回看、模拟本地备份、顶层影院播放器与无障碍兜底）
 - `site/assets/` — 应用图标 `icon.png`、实机截图 `screens/*.png`、介绍片 `pickup-ios-intro.mp4` 及封面 `video-poster.png`

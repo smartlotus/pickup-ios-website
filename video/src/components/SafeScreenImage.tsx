@@ -9,9 +9,9 @@ interface SafeScreenImageProps {
 }
 
 /**
- * Renders the kinetic live-animated Liquid Glass device UI screens directly
- * (enabling smooth Purple Dark <-> Monochrome morphs, animated red-pen strokes,
- * and live storage rings without async delayRender network blocking).
+ * Renders the kinetic live-animated monochrome Liquid Glass device UI screens
+ * directly (enabling smooth Obsidian Dark <-> Paper Light morphs, animated
+ * red-pen strokes, and live storage rings without async delayRender network blocking).
  */
 export const SafeScreenImage: React.FC<SafeScreenImageProps> = ({ fallback }) => {
   return <>{fallback}</>;

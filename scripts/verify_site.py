@@ -167,9 +167,10 @@ def validate_html_file(filename: str, expected_lang: str, required_tokens: list[
             if frag and frag not in auditor.ids:
                 errors.append(f"{filename}: broken fragment link '#{frag}'")
             continue
-        if target in DEFERRED_MEDIA_ASSETS:
+        clean_target = target.split("?", 1)[0].split("#", 1)[0]
+        if clean_target in DEFERRED_MEDIA_ASSETS:
             continue
-        resolved = (SITE / target).resolve()
+        resolved = (SITE / clean_target).resolve()
         if not resolved.exists():
             errors.append(f"{filename}: broken local {attr_name}='{target}'")
 
@@ -261,6 +262,7 @@ def main() -> int:
         "SideStore / AltStore",
         "Sideloadly",
         "Xcode",
+        "墨黑毛玻璃",
     ]
 
     en_required = shared_required + [
@@ -275,10 +277,18 @@ def main() -> int:
         "SideStore / AltStore",
         "Sideloadly",
         "Xcode",
+        "Obsidian Glass",
     ]
 
     errors.extend(validate_html_file("index.html", "zh-CN", zh_required))
     errors.extend(validate_html_file("en.html", "en", en_required))
+
+    # Enforce strict pure-monochrome palette (zero purple/gold/mint hex remnants in site/)
+    forbidden_palette_re = re.compile(r"#(?:7c4dff|a78bfa|c5a86a|6ee7b7|58d68d|0d0c12)\b", re.IGNORECASE)
+    for asset_file in (SITE / "index.html", SITE / "en.html", SITE / "style.css", SITE / "app.js", SITE / "translations.js"):
+        txt = asset_file.read_text(encoding="utf-8")
+        if forbidden_palette_re.search(txt):
+            errors.append(f"{asset_file.name}: contains forbidden non-monochrome color token")
 
     # Check CSS braces balance
     css = (SITE / "style.css").read_text(encoding="utf-8")

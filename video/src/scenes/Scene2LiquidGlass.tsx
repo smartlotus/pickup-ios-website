@@ -32,8 +32,8 @@ export const Scene2LiquidGlass: React.FC = () => {
     extrapolateRight: 'clamp',
   });
 
-  // Animated theme morph: Purple Dark (0..185) -> smooth morph (185..310) -> Monochrome (310..480)
-  const monoMix = interpolate(frame, [185, 305], [0, 1], {
+  // Smooth morph: Obsidian Frosted Glass (0..185) -> morph (185..305) -> Paper Light Frosted Glass (305..480)
+  const lightMix = interpolate(frame, [185, 305], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
@@ -52,12 +52,20 @@ export const Scene2LiquidGlass: React.FC = () => {
   const phoneY = interpolate(phoneSpring, [0, 1], [64, 0]) + Math.sin(frame * 0.03) * 6;
   const padY = interpolate(padSpring, [0, 1], [72, 0]) + Math.cos(frame * 0.025) * 5;
 
-  const accentColor = mixHex('#A78BFA', '#F4F3ED', monoMix);
-  const subtitleColor = mixHex('#B3AFC0', '#A2A19A', monoMix);
+  const titleColor = mixHex(BRAND_COLORS.ivory, BRAND_COLORS.ink, lightMix);
+  const subtitleColor = mixHex(BRAND_COLORS.muted, BRAND_COLORS.mutedLight, lightMix);
+
+  const thumbGray = Math.round(interpolate(lightMix, [0, 1], [255, 17]));
+  const thumbAlpha = interpolate(lightMix, [0, 1], [0.16, 0.88]);
+  const thumbBorderAlpha = interpolate(lightMix, [0, 1], [0.34, 0.92]);
+  const leftLabelColor =
+    lightMix < 0.5 ? BRAND_COLORS.ivory : BRAND_COLORS.mutedLight;
+  const rightLabelColor =
+    lightMix >= 0.5 ? BRAND_COLORS.paperLight : BRAND_COLORS.muted;
 
   return (
     <AbsoluteFill style={{ opacity: enterOpacity * exitOpacity }}>
-      <AuroraBackdrop monoMix={monoMix} goldGlow={0.12} />
+      <AuroraBackdrop lightMix={lightMix} />
 
       <div
         style={{
@@ -71,7 +79,7 @@ export const Scene2LiquidGlass: React.FC = () => {
           justifyContent: 'space-between',
         }}
       >
-        {/* Top Editorial Header + Live Theme Morph Switcher */}
+        {/* Top Editorial Header + Live Obsidian <-> Paper Theme Morph Switcher */}
         <div
           style={{
             display: 'flex',
@@ -80,7 +88,7 @@ export const Scene2LiquidGlass: React.FC = () => {
           }}
         >
           <div>
-            <LiquidGlassCapsule dotColor={accentColor} monoMix={monoMix}>
+            <LiquidGlassCapsule dotColor={titleColor} lightMix={lightMix}>
               iOS 26 Liquid Glass · iPhone &amp; iPad
             </LiquidGlassCapsule>
             <div
@@ -88,7 +96,7 @@ export const Scene2LiquidGlass: React.FC = () => {
                 fontFamily: FONT_SERIF,
                 fontSize: 52,
                 fontWeight: 700,
-                color: BRAND_COLORS.ivory,
+                color: titleColor,
                 marginTop: 18,
                 letterSpacing: '0.03em',
               }}
@@ -103,13 +111,13 @@ export const Scene2LiquidGlass: React.FC = () => {
                 marginTop: 8,
               }}
             >
-              紫黑极光与纯黑白极简双主题实时切换 · 原生 SVG 折射边界与高光扫掠
+              黑曜深色与纸墨浅白双主题实时切换 · 透明毛玻璃折射边界与高光扫掠
             </div>
           </div>
 
           {/* Animated Theme Morph Pill */}
           <LiquidGlassCard
-            monoMix={monoMix}
+            lightMix={lightMix}
             radius={999}
             style={{ width: 348, height: 60, padding: 6 }}
           >
@@ -128,15 +136,15 @@ export const Scene2LiquidGlass: React.FC = () => {
                   position: 'absolute',
                   top: 0,
                   bottom: 0,
-                  left: `${monoMix * 50}%`,
+                  left: `${lightMix * 50}%`,
                   width: '50%',
                   borderRadius: 999,
-                  background:
-                    monoMix > 0.5
-                      ? 'linear-gradient(135deg, rgba(244,243,237,0.22), rgba(255,255,255,0.08))'
-                      : 'linear-gradient(135deg, rgba(124,77,255,0.48), rgba(167,139,250,0.26))',
-                  border: `1px solid ${accentColor}77`,
-                  boxShadow: `0 4px 18px ${accentColor}33`,
+                  backgroundColor: `rgba(${thumbGray}, ${thumbGray}, ${thumbGray}, ${thumbAlpha.toFixed(2)})`,
+                  border: `1px solid rgba(${thumbGray}, ${thumbGray}, ${thumbGray}, ${thumbBorderAlpha.toFixed(2)})`,
+                  boxShadow:
+                    lightMix < 0.5
+                      ? '0 4px 16px rgba(0,0,0,0.28)'
+                      : '0 4px 16px rgba(17,17,17,0.16)',
                 }}
               />
               <div
@@ -145,12 +153,12 @@ export const Scene2LiquidGlass: React.FC = () => {
                   textAlign: 'center',
                   fontFamily: FONT_SANS,
                   fontSize: 15,
-                  fontWeight: monoMix < 0.5 ? 600 : 400,
-                  color: monoMix < 0.5 ? BRAND_COLORS.ivory : subtitleColor,
+                  fontWeight: lightMix < 0.5 ? 600 : 400,
+                  color: leftLabelColor,
                   zIndex: 2,
                 }}
               >
-                紫黑 Purple Dark
+                黑曜 Obsidian
               </div>
               <div
                 style={{
@@ -158,12 +166,12 @@ export const Scene2LiquidGlass: React.FC = () => {
                   textAlign: 'center',
                   fontFamily: FONT_SANS,
                   fontSize: 15,
-                  fontWeight: monoMix >= 0.5 ? 600 : 400,
-                  color: monoMix >= 0.5 ? BRAND_COLORS.ivory : subtitleColor,
+                  fontWeight: lightMix >= 0.5 ? 600 : 400,
+                  color: rightLabelColor,
                   zIndex: 2,
                 }}
               >
-                纯黑白 Mono
+                纸墨 Paper
               </div>
             </div>
           </LiquidGlassCard>
@@ -190,11 +198,11 @@ export const Scene2LiquidGlass: React.FC = () => {
               alignItems: 'center',
             }}
           >
-            <IPhoneBezel width={332} height={678} accentColor={accentColor}>
+            <IPhoneBezel width={332} height={678} lightMix={lightMix}>
               <SafeScreenImage
                 screenPath="screens/iphone-journal.png"
                 alt="Pickup iPhone Journal"
-                fallback={<FallbackJournalScreen monoMix={monoMix} />}
+                fallback={<FallbackJournalScreen lightMix={lightMix} />}
               />
             </IPhoneBezel>
           </div>
@@ -210,20 +218,20 @@ export const Scene2LiquidGlass: React.FC = () => {
               gap: 18,
             }}
           >
-            <IPadProBezel width={880} height={610} accentColor={accentColor}>
+            <IPadProBezel width={880} height={610} lightMix={lightMix}>
               <SafeScreenImage
                 screenPath="screens/ipad-splitview.png"
                 alt="Pickup iPad Split View"
-                fallback={<FallbackIPadSplitScreen monoMix={monoMix} />}
+                fallback={<FallbackIPadSplitScreen lightMix={lightMix} />}
               />
             </IPadProBezel>
 
             {/* Bottom Floating Glass Feature Bar */}
             <div style={{ display: 'flex', gap: 14 }}>
-              <LiquidGlassCapsule dotColor={BRAND_COLORS.redPen} monoMix={monoMix}>
+              <LiquidGlassCapsule dotColor={titleColor} lightMix={lightMix}>
                 杂志衬线 × 现代无衬线双排版
               </LiquidGlassCapsule>
-              <LiquidGlassCapsule dotColor={BRAND_COLORS.gold} monoMix={monoMix}>
+              <LiquidGlassCapsule dotColor={subtitleColor} lightMix={lightMix}>
                 悬浮胶囊底栏 · 滚动自动收敛
               </LiquidGlassCapsule>
             </div>

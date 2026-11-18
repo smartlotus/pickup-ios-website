@@ -1,40 +1,46 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="purple">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#0D0C12">
+  <meta name="color-scheme" content="light dark">
   <script>
     try {
-      var t = localStorage.getItem('pickup_theme');
-      if (t === 'mono' || t === 'purple') {
-        document.documentElement.dataset.theme = t;
-      }
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem('color-scheme') || 'light dark';
     } catch (_) {}
   </script>
-  <meta name="description" content="Pickup for iPhone &amp; iPad (iOS 26 Liquid Glass)：把日子，拾起来。极简紫夜与纯黑白双主题、红笔时间线、AI 零媒体隐私披露、AES-256-GCM 加密保险箱与免 $99 开发者费无线侧载。">
-  <meta property="og:title" content="Pickup for iOS 26 &amp; iPadOS · 把日子，拾起来。">
-  <meta property="og:description" content="专为 iOS 26 Liquid Glass 打造的纯本地日记胶囊，Android v2 100% 无损互通，免 $99 Apple 开发者费即可免费装机。">
-  <meta property="og:image" content="assets/video-poster.png">
-  <link rel="icon" href="assets/icon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/icon.png">
+  <meta name="description" content="Pickup for iOS &amp; iPadOS：黑白极简与透明毛玻璃日记本。支持本地导入导出、自动定时本地备份、红笔圈日时间线、零媒体上传 AI Hub 与免 $99 Apple 开发者费无线侧载。">
+  <meta property="og:title" content="Pickup — 把日子，拾起来。（iPhone &amp; iPad）">
+  <meta property="og:description" content="纯本地黑白毛玻璃日记，100% 互通 Android v2 备份，免 $99 开发者费用即可侧载使用。">
+  <meta property="og:image" content="assets/video-poster.png?v=2">
+  <link rel="icon" href="assets/icon.png?v=2" type="image/png">
+  <link rel="apple-touch-icon" href="assets/icon.png?v=2">
   <link rel="alternate" hreflang="en" href="en.html">
-  <link rel="stylesheet" href="style.css">
-  <script src="translations.js" defer></script>
-  <script src="app.js" defer></script>
-  <title>Pickup for iOS 26 &amp; iPadOS · 把日子，拾起来。</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <script src="translations.js?v=3" defer></script>
+  <script src="app.js?v=3" defer></script>
+  <title>Pickup — 把日子，拾起来。</title>
 </head>
 <body>
-  <!-- Inline SVG optical Liquid Glass displacement filter -->
-  <svg class="svg-defs" width="0" height="0" aria-hidden="true">
+  <a class="skip-link" href="#main-content">跳到正文</a>
+
+  <!-- Inline SVG Liquid Glass refraction filter & icon symbols -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <filter id="liquid-glass-refraction" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
         <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="11" result="noise"/>
-        <feGaussianBlur in="noise" stdDeviation="2.2" result="smoothNoise"/>
-        <feDisplacementMap in="SourceGraphic" in2="smoothNoise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+        <feGaussianBlur in="noise" stdDeviation="2.0" result="smoothNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="smoothNoise" scale="10" xChannelSelector="R" yChannelSelector="G"/>
       </filter>
     </defs>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h7v16H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm7 0h9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-9M6 8h2m-2 4h2m7-4h3m-3 4h3"/></symbol>
+    <symbol id="i-timeline" viewBox="0 0 24 24"><path d="M5 3v18m4-15h11M9 12h7m-7 6h11"/><circle cx="5" cy="6" r="1.5"/><circle cx="5" cy="12" r="1.5"/><circle cx="5" cy="18" r="1.5"/></symbol>
+    <symbol id="i-revisit" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 3 8M3 5v6h6m3-4v6l4 2"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.8 6.2L21 12l-6.2 2.8L12 21l-2.8-6.2L3 12l6.2-2.8ZM20 2v4m-2-2h4"/></symbol>
+    <symbol id="i-vault" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="12" cy="12" r="3"/><path d="M12 9v-2m0 10v-2m3-3h2M7 12h2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></symbol>
   </svg>
 
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
@@ -43,527 +49,513 @@
   </div>
   <div id="live-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 
-  <a class="skip-link" href="#main-content">跳到正文</a>
-
-  <header class="site-header" id="site-header">
-    <div class="header-capsule glass-panel glass-interactive">
-      <a class="brand" href="#main-content" aria-label="Pickup 首页">
-        <img class="brand-icon" src="assets/icon.png" width="32" height="32" alt="">
-        <span class="brand-name">拾 · Pickup</span>
-        <span class="brand-badge">iOS 26</span>
+  <!-- Compact Floating Frosted Glass Header -->
+  <header class="top-bar" id="top-bar">
+    <div class="top-bar-inner glass-surface glass-interactive">
+      <a class="wordmark" href="#main-content" aria-label="Pickup 首页">
+        <img src="assets/icon.png" width="28" height="28" alt="">
+        <span>Pickup<span class="wordmark-dot">.</span></span>
       </a>
 
-      <nav class="site-nav" aria-label="主导航">
-        <a href="#simulator">液态玻璃体验</a>
-        <a href="#gallery">真机界面</a>
-        <a href="#vault">数据主权</a>
-        <a href="#install">免费装机</a>
-        <a href="#faq">常见问题</a>
+      <nav class="header-nav" aria-label="主导航">
+        <a href="#experience">体验</a>
+        <a href="#features">功能</a>
+        <a href="#film">影像</a>
+        <a href="#privacy">数据</a>
+        <a href="#build">侧载</a>
       </nav>
 
-      <div class="header-controls">
-        <nav class="lang-switch" aria-label="语言切换">
-          <span aria-current="page">中</span>
-          <a href="en.html" lang="en" hreflang="en">EN</a>
-        </nav>
-        <button type="button" class="theme-btn" id="theme-toggle" aria-pressed="false">
-          <span class="theme-swatch" aria-hidden="true"></span>
-          <span id="theme-toggle-label">紫夜深色</span>
+      <div class="header-actions">
+        <a class="pill-control" href="en.html" hreflang="en" lang="en" aria-label="Switch to English">EN</a>
+        <button type="button" class="pill-control" id="theme-toggle" aria-pressed="false" aria-label="切换墨黑与素白透明毛玻璃外观">
+          <span class="scheme-state-dark">
+            <svg aria-hidden="true"><use href="#i-moon"/></svg>
+            <span class="scheme-label-text">墨黑</span>
+          </span>
+          <span class="scheme-state-light">
+            <svg aria-hidden="true"><use href="#i-sun"/></svg>
+            <span class="scheme-label-text">素白</span>
+          </span>
         </button>
-        <a class="nav-ipa-cta" href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">下载 IPA ↗</a>
+        <a class="pill-control pill-ipa" href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">获取 IPA ↗</a>
       </div>
     </div>
   </header>
 
   <main id="main-content" tabindex="-1">
-    <!-- HERO -->
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-shell">
-        <div>
-          <div class="hero-badges">
-            <span class="hero-pill">iOS 26 &amp; iPadOS · Liquid Glass</span>
-            <span class="hero-pill accent-gold">免 $99 开发者费侧载</span>
-          </div>
+    <!-- EDITORIAL HERO + LIVE MONOCHROME FROSTED SIMULATOR -->
+    <section class="hero wrap" id="hero-section" data-device="iphone" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> iPhone &amp; iPad · 透明毛玻璃日记本</p>
+        <h1 id="hero-title">
+          把日子，<br>
+          <span class="picked">拾<svg class="picked-circle" viewBox="0 0 120 120" aria-hidden="true"><path d="M98 32 C74 8, 18 14, 14 58 C10 96, 48 112, 78 102 C108 92, 114 48, 86 24"/></svg></span>起来。
+        </h1>
+        <p class="hero-description">
+          一段文字，一张实况，一首当时的歌。<br>
+          在黑白纸墨与透明毛玻璃里安静留存日常，自动定时本地备份，也给过去的自己留一句回应。
+        </p>
 
-          <h1 class="hero-title" id="hero-title">
-            把日子，<span class="redpen-wrap">拾<svg class="redpen-svg" viewBox="0 0 120 120" aria-hidden="true"><path class="redpen-path" d="M98 32 C74 8, 18 14, 14 58 C10 96, 48 112, 78 102 C108 92, 114 48, 86 24"/></svg></span>起来。
-          </h1>
-
-          <p class="hero-desc">
-            专为 iPhone 与 iPadOS 26 打造的纯本地记忆胶囊。承袭纯黑白纸墨与紫夜深色双美学，在真实 Liquid Glass 折射层次中记录日常、红笔圈出日子、跨时间回应过去的自己——零服务器上传，免 $99 Apple 开发者费用即可长久拥有。
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn-primary" href="#simulator">在线体验液态玻璃 ↓</a>
-            <button type="button" class="btn-glass glass-pill glass-interactive" command="show-modal" commandfor="film-dialog">▶ 观看 60fps 介绍片</button>
-            <a class="btn-ghost" href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">下载 IPA / GitHub ↗</a>
-          </div>
-
-          <ul class="hero-metrics">
-            <li>
-              <strong>$0</strong>
-              <span>免 $99 Apple 开发者费 · 无线续签</span>
-            </li>
-            <li>
-              <strong>0 bytes</strong>
-              <span>AI 提问绝不上传任何照片与视频</span>
-            </li>
-            <li>
-              <strong>AES-256</strong>
-              <span>GCM 加密保险箱与 Android v2 互通</span>
-            </li>
-          </ul>
+        <div class="hero-actions">
+          <a class="button primary" href="#experience">在线体验液态玻璃 <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <button type="button" class="button glass-btn glass-surface glass-interactive" command="show-modal" commandfor="film-dialog">观看 60fps 介绍片</button>
+          <a class="text-link" href="https://github.com/smartlotus/pickup-ios" target="_blank" rel="noopener noreferrer">GitHub 仓库 ↗</a>
         </div>
 
-        <aside class="hero-artifact glass-panel glass-interactive" aria-label="记忆怀表与核心亮点">
-          <div class="dial-card-head">
-            <div class="dial-app-id">
-              <img src="assets/icon.png" width="45" height="45" alt="Pickup 应用图标">
-              <div>
-                <strong>Pickup for iOS</strong>
-                <span>SwiftUI · iOS 26 &amp; iPadOS</span>
-              </div>
-            </div>
-            <span class="hero-pill accent-gold">v1.0.0</span>
-          </div>
-
-          <div class="dial-visual">
-            <svg class="memory-dial-svg" viewBox="0 0 220 220" role="img" aria-label="复古金记忆怀表刻度盘">
-              <circle cx="110" cy="110" r="98" fill="none" stroke="rgba(197, 168, 106, 0.25)" stroke-width="1.5"/>
-              <circle cx="110" cy="110" r="84" fill="none" stroke="rgba(197, 168, 106, 0.45)" stroke-width="1.5" stroke-dasharray="4 7"/>
-              <circle cx="110" cy="110" r="68" fill="none" stroke="rgba(167, 139, 250, 0.28)" stroke-width="1"/>
-              <path d="M172 52 C136 16, 48 26, 36 98 C24 166, 86 196, 148 180 C190 168, 198 92, 160 44" fill="none" stroke="#F46862" stroke-width="3.2" stroke-linecap="round"/>
-              <line x1="146" y1="74" x2="169" y2="51" stroke="#C5A86A" stroke-width="2.6" stroke-linecap="round"/>
-              <circle cx="169" cy="51" r="4" fill="#C5A86A"/>
-            </svg>
-            <div class="dial-center-readout">
-              <span class="dial-kanji">拾</span>
-              <span class="dial-sub">11 · 17 · REVISIT</span>
-            </div>
-          </div>
-
-          <div class="hero-film-teaser">
-            <div>
-              <strong>36 秒 60fps 产品介绍片</strong>
-              <span>液态玻璃折射 · 红笔时间线 · 数据金库</span>
-            </div>
-            <button type="button" class="sim-mini-btn" command="show-modal" commandfor="film-dialog">▶ 播放</button>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE DUAL-DEVICE SIMULATOR -->
-    <section class="wrap reveal-section" id="simulator" aria-labelledby="sim-title">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>01 / INTERACTIVE DUAL-DEVICE STAGE</p>
-          <h2 class="section-title" id="sim-title">一套数据内核，iPhone 与 iPadOS 双形态实时体验。</h2>
-        </div>
-        <p class="section-sub">自由切换 iPhone 17 Pro 掌心胶囊与 iPad Pro 三栏 Split-View，真实操作日记筛选、红笔日历、去留写入、AI 披露预览与数据中心。</p>
-      </div>
-
-      <div class="sim-toolbar glass-panel glass-interactive">
-        <div class="device-tablist" role="tablist" aria-label="设备模拟形态切换" focusgroup="tablist nomemory">
-          <button type="button" role="tab" class="sim-tab-btn" id="dev-tab-iphone" aria-selected="true" focusgroupstart data-device="iphone">iPhone 17 Pro</button>
-          <button type="button" role="tab" class="sim-tab-btn" id="dev-tab-ipad" aria-selected="false" data-device="ipad">iPad Pro Split-View</button>
+        <div class="hero-meta">
+          <span>IPHONE &amp; IPAD</span>
+          <span>免 $99 开发者费侧载</span>
+          <span>定时本地备份与导入导出</span>
+          <span>MIT</span>
         </div>
 
-        <div class="sim-toolbar-right">
-          <button type="button" class="sim-mini-btn" id="sim-reset-btn">↻ 重置演示数据</button>
+        <div class="margin-note">
+          <span class="note-line" aria-hidden="true"></span>
+          <p>日子不必特别，<br>值得留下就好。</p>
         </div>
       </div>
 
-      <div class="simulator-stage" id="simulator-stage" data-device="iphone">
-        <div class="device-chassis">
+      <div class="hero-visual" id="experience">
+        <svg aria-hidden="true" class="memory-dial" viewBox="0 0 500 500">
+          <circle cx="250" cy="250" r="226"/>
+          <circle cx="250" cy="250" r="212"/>
+          <path d="M250 44v12m206 194h-12M250 456v-12M44 250h12M353 72l-6 11m81 64-11 6m11 194-11-6m-64 87-6-11m-194 11 6-11m-87-64 11-6m-11-194 11 6m64-81 6 11"/>
+          <text x="250" y="82">XII</text>
+          <text x="423" y="255">III</text>
+          <text x="250" y="432">VI</text>
+          <text x="77" y="255">IX</text>
+        </svg>
+        <div class="orbit-word" aria-hidden="true">拾起那些日常</div>
+
+        <!-- Clean Frosted Segmented Switcher -->
+        <div class="device-switch-bar glass-surface glass-interactive">
+          <div class="device-tablist" role="tablist" aria-label="设备形态切换" focusgroup="tablist nomemory">
+            <button type="button" role="tab" class="seg-tab-btn" id="dev-tab-iphone" aria-selected="true" focusgroupstart data-device="iphone">iPhone</button>
+            <button type="button" role="tab" class="seg-tab-btn" id="dev-tab-ipad" aria-selected="false" data-device="ipad">iPad Split-View</button>
+          </div>
+          <button type="button" class="reset-icon-btn" id="sim-reset-btn" aria-label="重置演示数据" title="重置演示数据">↻</button>
+        </div>
+
+        <div class="simulator-stage" id="simulator-stage" data-device="iphone">
           <div class="device-bezel">
-            <div class="device-status-bar">
-              <span>9:41</span>
-              <div class="dynamic-island" aria-hidden="true"></div>
-              <span class="ipad-split-badge">iPadOS 26 · Three-Column Split View</span>
-              <span>5G · 100%</span>
-            </div>
-
-            <div class="sim-workspace">
-              <!-- iPad Split View Sidebar -->
-              <aside class="sim-ipad-sidebar" aria-label="iPad 侧边导航栏">
-                <div>
-                  <div class="ipad-sidebar-brand">
-                    <img src="assets/icon.png" width="28" height="28" alt="">
-                    <strong>Pickup · iPadOS</strong>
-                  </div>
-                  <div class="ipad-sidebar-nav" role="tablist" aria-orientation="vertical" aria-label="iPad 视图标签" focusgroup="tablist nomemory">
-                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-journal" aria-selected="true" focusgroupstart data-sim-tab="journal"><span>日记 Capture</span><span>5</span></button>
-                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-timeline" aria-selected="false" data-sim-tab="timeline"><span>时间线 Timeline</span><span>7</span></button>
-                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-revisit" aria-selected="false" data-sim-tab="revisit"><span>去留 Revisit</span><span>1</span></button>
-                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-ai" aria-selected="false" data-sim-tab="ai"><span>AI Hub</span><span>0B</span></button>
-                    <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-vault" aria-selected="false" data-sim-tab="vault"><span>数据 Data Vault</span><span>ZIP</span></button>
-                  </div>
-                </div>
-                <div class="ipad-kbd-row">
-                  <kbd>⌘N</kbd><kbd>⌘F</kbd><kbd>⌘1–5</kbd>
-                </div>
-              </aside>
-
-              <!-- Main Interactive Screen -->
-              <div class="sim-main-col">
-                <div class="sim-app-header">
-                  <span class="sim-app-title">Pickup</span>
-                  <span class="sim-streak-pill">连续记录 7 天</span>
-                </div>
-
-                <div class="sim-panels-stack">
-                  <!-- TAB 1: JOURNAL CAPTURE -->
-                  <div role="tabpanel" id="sim-panel-journal" aria-labelledby="dock-tab-journal">
-                    <div class="panel-inner">
-                      <div class="sim-search-row">
-                        <label for="sim-search-input" class="visually-hidden">搜索记忆、歌曲、标签或回看</label>
-                        <input type="search" id="sim-search-input" class="sim-search-input" placeholder="搜索记录、歌曲、标签或回看…">
-                      </div>
-                      <div class="sim-filter-strip" role="group" aria-label="日记筛选">
-                        <button type="button" class="chip-btn" data-journal-filter="all" aria-pressed="true">全部</button>
-                        <button type="button" class="chip-btn" data-journal-filter="today" aria-pressed="false">今天</button>
-                        <button type="button" class="chip-btn" data-journal-filter="photos" aria-pressed="false">有图</button>
-                        <button type="button" class="chip-btn" data-journal-filter="reflections" aria-pressed="false">有回看</button>
-                        <button type="button" class="chip-btn" data-journal-filter="pinned" aria-pressed="false">星标</button>
-                      </div>
-                      <div id="sim-journal-list" class="sim-entry-list">
-                        <article class="sim-entry-card">
-                          <div class="entry-meta-row">
-                            <span>今天 · 20:14</span>
-                            <div class="entry-badges">
-                              <span class="badge-tag">松弛</span>
-                              <span class="badge-tag">微风 18°C</span>
-                            </div>
-                          </div>
-                          <p class="entry-prose">下班换了一条绕远的路。路过转角花店还亮着灯，挑了一束洋甘菊慢慢走回家。晚风把一天的紧绷都吹散了。</p>
-                          <span class="soundtrack-pill">♪ 晚风 — 夜间电台</span>
-                        </article>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- TAB 2: TIMELINE -->
-                  <div role="tabpanel" id="sim-panel-timeline" aria-labelledby="dock-tab-timeline" hidden="until-found">
-                    <div class="panel-inner">
-                      <div class="calendar-card">
-                        <div class="calendar-header">
-                          <strong>2026 年 11 月</strong>
-                          <span class="badge-tag">红笔圈起有记忆的日子</span>
-                        </div>
-                        <div class="calendar-weekdays" aria-hidden="true">
-                          <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
-                        </div>
-                        <div id="sim-calendar-days" class="calendar-days"></div>
-                      </div>
-                      <div id="sim-timeline-selected" class="sim-entry-list"></div>
-                      <div id="sim-on-this-day" class="on-this-day-card"></div>
-                    </div>
-                  </div>
-
-                  <!-- TAB 3: REVISIT -->
-                  <div role="tabpanel" id="sim-panel-revisit" aria-labelledby="dock-tab-revisit" hidden="until-found">
-                    <div class="panel-inner">
-                      <div class="revisit-header">
-                        <span class="gold-kicker">今日偶遇 · REVISIT DIAL</span>
-                        <button type="button" id="sim-revisit-shuffle" class="sim-mini-btn">↻ 换一条记忆</button>
-                      </div>
-                      <div id="sim-revisit-card" class="revisit-card"></div>
-                      <form id="sim-revisit-form" class="revisit-reply-form">
-                        <label for="sim-revisit-input" class="visually-hidden">给过去的自己写一句回应</label>
-                        <input id="sim-revisit-input" type="text" placeholder="给过去的自己写一句回应…" required>
-                        <button type="submit">写入回看</button>
-                      </form>
-                    </div>
-                  </div>
-
-                  <!-- TAB 4: AI HUB -->
-                  <div role="tabpanel" id="sim-panel-ai" aria-labelledby="dock-tab-ai" hidden="until-found">
-                    <div class="panel-inner">
-                      <div class="sim-filter-strip" role="group" aria-label="AI 检索范围">
-                        <button type="button" class="chip-btn" data-ai-scope="intelligent" aria-pressed="true">智能匹配</button>
-                        <button type="button" class="chip-btn" data-ai-scope="all" aria-pressed="false">全部</button>
-                        <button type="button" class="chip-btn" data-ai-scope="custom" aria-pressed="false">日期范围</button>
-                      </div>
-                      <div class="sim-filter-strip" role="group" aria-label="提问模板">
-                        <button type="button" class="chip-btn" data-ai-prompt="calm" aria-pressed="true">哪些瞬间最平静？</button>
-                        <button type="button" class="chip-btn" data-ai-prompt="songs" aria-pressed="false">近期听歌脉络</button>
-                        <button type="button" class="chip-btn" data-ai-prompt="summary" aria-pressed="false">本周回忆总结</button>
-                      </div>
-                      <div id="sim-ai-disclosure" class="ai-disclosure-card"></div>
-                      <div id="sim-ai-answer" class="ai-answer-box"></div>
-                    </div>
-                  </div>
-
-                  <!-- TAB 5: DATA VAULT -->
-                  <div role="tabpanel" id="sim-panel-vault" aria-labelledby="dock-tab-vault" hidden="until-found">
-                    <div class="panel-inner">
-                      <div class="vault-ring-row">
-                        <svg id="sim-storage-ring" class="storage-ring-svg" viewBox="0 0 120 120" role="img" aria-labelledby="ring-title">
-                          <title id="ring-title">本地存储分布环状图</title>
-                        </svg>
-                        <ul id="sim-storage-legend" class="storage-legend"></ul>
-                      </div>
-
-                      <div class="vault-controls-card">
-                        <div class="sim-filter-strip" role="group" aria-label="自动备份频率">
-                          <button type="button" class="chip-btn" data-vault-freq="6h" aria-pressed="false">每 6 小时</button>
-                          <button type="button" class="chip-btn" data-vault-freq="daily" aria-pressed="true">每天 22:30</button>
-                          <button type="button" class="chip-btn" data-vault-freq="weekly" aria-pressed="false">每周</button>
-                        </div>
-                        <div class="sim-filter-strip" role="group" aria-label="保留策略">
-                          <button type="button" class="chip-btn" data-vault-ret="7" aria-pressed="true">保留 7 份</button>
-                          <button type="button" class="chip-btn" data-vault-ret="15" aria-pressed="false">保留 15 份</button>
-                          <button type="button" class="chip-btn" data-vault-ret="all" aria-pressed="false">保留全部</button>
-                        </div>
-                        <div class="sim-filter-strip" role="group" aria-label="导出格式">
-                          <button type="button" class="chip-btn" data-vault-format="zip" aria-pressed="true">Android v2 ZIP</button>
-                          <button type="button" class="chip-btn" data-vault-format="vault" aria-pressed="false">加密 .pickupvault</button>
-                          <button type="button" class="chip-btn" data-vault-format="markdown" aria-pressed="false">Markdown 文集</button>
-                        </div>
-                        <button type="button" id="sim-vault-backup-btn" class="btn-primary">立即模拟备份</button>
-                        <div id="sim-vault-toast" class="sim-toast" role="status" hidden></div>
-                        <pre id="sim-vault-preview" class="vault-format-pre"></pre>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- iPhone Floating Liquid Glass Bottom Dock -->
-                <div class="sim-iphone-dock" role="tablist" aria-label="iPhone 底部液态玻璃导航" focusgroup="tablist nomemory">
-                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-journal" aria-selected="true" focusgroupstart data-sim-tab="journal">日记</button>
-                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-timeline" aria-selected="false" data-sim-tab="timeline">时间线</button>
-                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-revisit" aria-selected="false" data-sim-tab="revisit">去留</button>
-                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-ai" aria-selected="false" data-sim-tab="ai">AI Hub</button>
-                  <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-vault" aria-selected="false" data-sim-tab="vault">数据</button>
-                </div>
+            <div class="device-screen">
+              <div class="device-status-bar" aria-hidden="true">
+                <span>09:41</span>
+                <div class="dynamic-island"></div>
+                <span class="ipad-split-badge">iPadOS Split View</span>
+                <span>100%</span>
               </div>
 
-              <!-- iPad Right Live Inspector -->
-              <aside class="sim-ipad-inspector" aria-label="iPad 右侧状态检查器">
-                <div id="sim-inspector-content"></div>
-              </aside>
+              <div class="sim-workspace">
+                <!-- iPad Left Sidebar -->
+                <aside class="sim-ipad-sidebar" aria-label="iPad 侧边导航栏">
+                  <div>
+                    <div class="ipad-sidebar-brand">
+                      <img src="assets/icon.png" width="22" height="22" alt="">
+                      <span>Pickup</span>
+                    </div>
+                    <div class="ipad-sidebar-nav" role="tablist" aria-orientation="vertical" aria-label="iPad 功能栏目" focusgroup="tablist nomemory">
+                      <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-journal" aria-selected="true" focusgroupstart data-sim-tab="journal"><span>日记 Capture</span><span>5</span></button>
+                      <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-timeline" aria-selected="false" data-sim-tab="timeline"><span>时间线 Timeline</span><span>7</span></button>
+                      <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-revisit" aria-selected="false" data-sim-tab="revisit"><span>去留 Revisit</span><span>1</span></button>
+                      <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-ai" aria-selected="false" data-sim-tab="ai"><span>AI Hub</span><span>0B</span></button>
+                      <button type="button" role="tab" class="ipad-nav-btn" id="ipad-tab-vault" aria-selected="false" data-sim-tab="vault"><span>数据 Data Vault</span><span>ZIP</span></button>
+                    </div>
+                  </div>
+                  <div class="ipad-kbd-row">
+                    <kbd>⌘N</kbd><kbd>⌘F</kbd><kbd>⌘1–5</kbd>
+                  </div>
+                </aside>
+
+                <!-- Center App Screen -->
+                <div class="sim-main-col">
+                  <div class="sim-app-header">
+                    <span class="sim-app-title">Pickup</span>
+                    <span class="sim-streak-pill"><span class="sim-streak-dot" aria-hidden="true"></span> 连续 7 天</span>
+                  </div>
+
+                  <div class="sim-panels-stack">
+                    <!-- TAB 1: JOURNAL -->
+                    <div role="tabpanel" id="sim-panel-journal" aria-labelledby="dock-tab-journal">
+                      <div class="panel-inner">
+                        <label for="sim-search-input" class="visually-hidden">搜索记录、歌曲、标签或回看</label>
+                        <input type="search" id="sim-search-input" class="sim-search-input" placeholder="搜索记录、歌曲、标签或回看…">
+                        <div class="sim-filter-strip" role="group" aria-label="日记筛选">
+                          <button type="button" class="chip-btn" data-journal-filter="all" aria-pressed="true">全部</button>
+                          <button type="button" class="chip-btn" data-journal-filter="today" aria-pressed="false">今天</button>
+                          <button type="button" class="chip-btn" data-journal-filter="photos" aria-pressed="false">有图</button>
+                          <button type="button" class="chip-btn" data-journal-filter="reflections" aria-pressed="false">有回看</button>
+                          <button type="button" class="chip-btn" data-journal-filter="pinned" aria-pressed="false">星标</button>
+                        </div>
+                        <div id="sim-journal-list" class="sim-entry-list">
+                          <article class="sim-entry-card">
+                            <div class="entry-meta-row"><span>今天 · 20:14</span></div>
+                            <p class="entry-prose">下班换了一条绕远的路。路过转角花店还亮着灯，挑了一束洋甘菊慢慢走回家。</p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- TAB 2: TIMELINE -->
+                    <div role="tabpanel" id="sim-panel-timeline" aria-labelledby="dock-tab-timeline" hidden="until-found">
+                      <div class="panel-inner">
+                        <div class="calendar-card">
+                          <div class="calendar-header">
+                            <strong>2026 年 11 月</strong>
+                            <span class="badge-tag">红笔圈起有记忆的日子</span>
+                          </div>
+                          <div class="calendar-weekdays" aria-hidden="true">
+                            <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+                          </div>
+                          <div id="sim-calendar-days" class="calendar-days"></div>
+                        </div>
+                        <div id="sim-timeline-selected" class="sim-entry-list"></div>
+                        <div id="sim-on-this-day" class="on-this-day-card"></div>
+                      </div>
+                    </div>
+
+                    <!-- TAB 3: REVISIT -->
+                    <div role="tabpanel" id="sim-panel-revisit" aria-labelledby="dock-tab-revisit" hidden="until-found">
+                      <div class="panel-inner">
+                        <div class="revisit-header">
+                          <span class="mono-kicker">今日偶遇 · REVISIT</span>
+                          <button type="button" id="sim-revisit-shuffle" class="sim-mini-btn">↻ 换一条记忆</button>
+                        </div>
+                        <div id="sim-revisit-card" class="revisit-card"></div>
+                        <form id="sim-revisit-form" class="revisit-reply-form">
+                          <label for="sim-revisit-input" class="visually-hidden">给过去的自己写一句回应</label>
+                          <input id="sim-revisit-input" type="text" placeholder="给过去的自己写一句回应…" required>
+                          <button type="submit">写入回看</button>
+                        </form>
+                      </div>
+                    </div>
+
+                    <!-- TAB 4: AI HUB -->
+                    <div role="tabpanel" id="sim-panel-ai" aria-labelledby="dock-tab-ai" hidden="until-found">
+                      <div class="panel-inner">
+                        <div class="sim-filter-strip" role="group" aria-label="AI 检索范围">
+                          <button type="button" class="chip-btn" data-ai-scope="intelligent" aria-pressed="true">智能匹配</button>
+                          <button type="button" class="chip-btn" data-ai-scope="all" aria-pressed="false">全部</button>
+                          <button type="button" class="chip-btn" data-ai-scope="custom" aria-pressed="false">日期范围</button>
+                        </div>
+                        <div class="sim-filter-strip" role="group" aria-label="提问模板">
+                          <button type="button" class="chip-btn" data-ai-prompt="calm" aria-pressed="true">哪些瞬间最平静？</button>
+                          <button type="button" class="chip-btn" data-ai-prompt="songs" aria-pressed="false">近期听歌</button>
+                          <button type="button" class="chip-btn" data-ai-prompt="summary" aria-pressed="false">本周总结</button>
+                        </div>
+                        <div id="sim-ai-disclosure" class="ai-disclosure-card"></div>
+                        <div id="sim-ai-answer" class="ai-answer-box"></div>
+                      </div>
+                    </div>
+
+                    <!-- TAB 5: DATA VAULT -->
+                    <div role="tabpanel" id="sim-panel-vault" aria-labelledby="dock-tab-vault" hidden="until-found">
+                      <div class="panel-inner">
+                        <div class="vault-ring-row">
+                          <svg id="sim-storage-ring" class="storage-ring-svg" viewBox="0 0 120 120" role="img" aria-labelledby="ring-title">
+                            <title id="ring-title">本地存储分布环状图</title>
+                          </svg>
+                          <ul id="sim-storage-legend" class="storage-legend"></ul>
+                        </div>
+
+                        <div class="vault-controls-card">
+                          <div class="sim-filter-strip" role="group" aria-label="自动备份频率">
+                            <button type="button" class="chip-btn" data-vault-freq="6h" aria-pressed="false">每 6 小时</button>
+                            <button type="button" class="chip-btn" data-vault-freq="daily" aria-pressed="true">每天 22:30</button>
+                            <button type="button" class="chip-btn" data-vault-freq="weekly" aria-pressed="false">每周</button>
+                          </div>
+                          <div class="sim-filter-strip" role="group" aria-label="保留策略">
+                            <button type="button" class="chip-btn" data-vault-ret="7" aria-pressed="true">保留 7 份</button>
+                            <button type="button" class="chip-btn" data-vault-ret="15" aria-pressed="false">保留 15 份</button>
+                            <button type="button" class="chip-btn" data-vault-ret="all" aria-pressed="false">保留全部</button>
+                          </div>
+                          <div class="sim-filter-strip" role="group" aria-label="导出格式">
+                            <button type="button" class="chip-btn" data-vault-format="zip" aria-pressed="true">v2 ZIP</button>
+                            <button type="button" class="chip-btn" data-vault-format="vault" aria-pressed="false">AES-256 加密包</button>
+                            <button type="button" class="chip-btn" data-vault-format="markdown" aria-pressed="false">Markdown</button>
+                          </div>
+                          <button type="button" id="sim-vault-backup-btn" class="vault-sim-btn">立即模拟备份</button>
+                          <div id="sim-vault-toast" class="sim-toast" role="status" hidden></div>
+                          <pre id="sim-vault-preview" class="vault-format-pre"></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Floating Monochrome Frosted Glass Dock -->
+                  <div class="sim-iphone-dock" role="tablist" aria-label="iPhone 底部毛玻璃导航" focusgroup="tablist nomemory">
+                    <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-journal" aria-selected="true" focusgroupstart data-sim-tab="journal">日记</button>
+                    <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-timeline" aria-selected="false" data-sim-tab="timeline">时间线</button>
+                    <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-revisit" aria-selected="false" data-sim-tab="revisit">去留</button>
+                    <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-ai" aria-selected="false" data-sim-tab="ai">AI Hub</button>
+                    <button type="button" role="tab" class="dock-tab-btn" id="dock-tab-vault" aria-selected="false" data-sim-tab="vault">数据</button>
+                  </div>
+                </div>
+
+                <!-- iPad Right Live Inspector -->
+                <aside class="sim-ipad-inspector" aria-label="iPad 右侧检查器">
+                  <div id="sim-inspector-content"></div>
+                </aside>
+              </div>
             </div>
           </div>
+        </div>
+
+        <div class="visual-caption">
+          <span class="caption-line" aria-hidden="true"></span>
+          <p>点点下方栏目，试着回到某一天。<small>黑白透明毛玻璃实时交互 · 虚构示例内容</small></p>
         </div>
       </div>
     </section>
 
-    <!-- FILM SHOWCASE BANNER -->
-    <section class="wrap reveal-section" id="film" aria-labelledby="film-title">
-      <div class="film-banner glass-panel glass-interactive">
+    <div class="chapter-strip wrap">
+      <span>记录 / 回望 / 守护本地记忆</span>
+      <span>01 — 05</span>
+    </div>
+
+    <!-- EDITORIAL FEATURES LIST -->
+    <section class="editorial-split wrap reveal-section" id="features" aria-labelledby="features-title">
+      <div class="section-heading">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> 微小的日常</p>
+        <h2 id="features-title">留下当下。<br>也遇见从前。</h2>
+        <p class="section-sub">延续 Android 版克制纯黑白纸墨美学，五个入口把零散的日常与本地数据主权安静连在一起。</p>
+      </div>
+
+      <div class="feature-list">
+        <article class="feature-row">
+          <span class="feature-number">01</span>
+          <div>
+            <h3>日记 <span>Capture</span></h3>
+            <p>写下文字，添上照片、视频或 Live Photo 实况，记住此刻的歌。本地草稿自动保存，旧记录也支持继续写回批注。</p>
+            <span class="feature-tag">文字 · 实况媒体 · 音乐 · 离线搜索</span>
+          </div>
+          <svg aria-hidden="true"><use href="#i-book"/></svg>
+        </article>
+
+        <article class="feature-row">
+          <span class="feature-number">02</span>
+          <div>
+            <h3>时间线 <span>Timeline</span></h3>
+            <p>一笔有机红笔圈起有记忆的日子。轻点日期回到那天，自动发现「往年今日」回响与连续记录天数。</p>
+            <span class="feature-tag">红笔圈日 · 月历浏览 · 往年今日</span>
+          </div>
+          <svg aria-hidden="true"><use href="#i-timeline"/></svg>
+        </article>
+
+        <article class="feature-row">
+          <span class="feature-number">03</span>
+          <div>
+            <h3>去留 <span>Revisit</span></h3>
+            <p>每天打开时与一条旧日记偶遇，读一读当时的心境，写一句此刻的回应，或者随时随机翻看另一段记忆。</p>
+            <span class="feature-tag">每日偶遇 · 随机拾取 · 跨时空写回</span>
+          </div>
+          <svg aria-hidden="true"><use href="#i-revisit"/></svg>
+        </article>
+
+        <article class="feature-row">
+          <span class="feature-number">04</span>
+          <div>
+            <h3>AI Hub <span>Reflect</span></h3>
+            <p>自选 OpenAI、Claude 或本地模型总结与问答。发送前强迫弹出纯文本披露预览，照片与视频永远 0 bytes 上传。</p>
+            <span class="feature-tag">自选服务 · 发送前披露 · 0 bytes 媒体</span>
+          </div>
+          <svg aria-hidden="true"><use href="#i-spark"/></svg>
+        </article>
+
+        <article class="feature-row">
+          <span class="feature-number">05</span>
+          <div>
+            <h3>数据保险箱 <span>Data Vault</span></h3>
+            <p>支持 Android v2 标准 ZIP、AES-256-GCM 加密保险箱与 Markdown 归档导入导出；支持自动定时本地备份至系统「文件 App / iCloud / NAS」并管理孤儿冗余媒体。</p>
+            <span class="feature-tag">全量导入导出 · 定时自动备份 · 存储体检</span>
+          </div>
+          <svg aria-hidden="true"><use href="#i-vault"/></svg>
+        </article>
+      </div>
+    </section>
+
+    <!-- FILM & MONOCHROME FROSTED GLASS SCREEN GALLERY -->
+    <section class="media-section wrap reveal-section" id="film" aria-labelledby="film-title">
+      <div class="media-head">
         <div>
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>02 / 60FPS PRODUCT FILM</p>
-          <h2 class="section-title" id="film-title">光影折射、红笔圈日与怀表回响。</h2>
-          <p class="section-sub">点击开启原生顶层影院播放带音轨的 60fps 介绍影片，随时跳转 5 个章节段落。</p>
-          <div class="hero-actions" style="margin-block-start: 1.35rem; margin-block-end: 0;">
-            <button type="button" class="btn-primary" command="show-modal" commandfor="film-dialog">▶ 播放介绍影片</button>
-            <a class="btn-ghost" href="assets/pickup-ios-intro.mp4" download="pickup-ios-intro.mp4">下载 MP4 ↓</a>
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> iOS &amp; iPadOS 实机影像</p>
+          <h2 id="film-title">透明毛玻璃、怀表与实机界面。</h2>
+        </div>
+        <p class="section-sub" style="margin-top: 0;">墨黑毛玻璃与素白毛玻璃双质感对照，点击短片或任意画面即可在顶层放大查看。</p>
+      </div>
+
+      <div class="film-stage glass-surface glass-interactive">
+        <div>
+          <span class="mono-kicker">60FPS PRODUCT FILM · 1920 × 1080</span>
+          <h3 style="font: 500 24px/1.4 var(--serif); margin-bottom: 10px;">把黑白纸墨与液态玻璃融为一页</h3>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.9; margin-bottom: 18px;">34 秒介绍影片涵盖怀表开屏、墨黑与素白双毛玻璃形态、红笔圈日时间线、数据金库定时备份与免 $99 侧载流程。</p>
+          <div class="hero-actions" style="margin-top: 0;">
+            <button type="button" class="button primary" command="show-modal" commandfor="film-dialog">播放 60fps 影片</button>
+            <a class="text-link" href="assets/pickup-ios-intro.mp4" download="pickup-ios-intro.mp4">下载 MP4 ↓</a>
           </div>
         </div>
-        <button type="button" class="film-poster-trigger" command="show-modal" commandfor="film-dialog" aria-label="打开 60fps 产品介绍影片">
-          <img src="assets/video-poster.png" width="1280" height="720" loading="lazy" decoding="async" alt="Pickup for iOS 26 介绍片海报预览">
+        <button type="button" class="film-poster-trigger" command="show-modal" commandfor="film-dialog" aria-label="播放 Pickup 60fps 产品介绍影片">
+          <img src="assets/video-poster.png?v=2" width="1280" height="720" decoding="async" alt="Pickup for iOS 黑白透明毛玻璃 60fps 介绍影片封面">
           <span class="film-play-overlay" aria-hidden="true">
             <span class="film-play-badge">▶ 1080p · 60fps</span>
           </span>
         </button>
       </div>
-    </section>
 
-    <!-- iOS 26 LIQUID GLASS UI GALLERY -->
-    <section class="wrap gallery-section reveal-section" id="gallery" aria-labelledby="gallery-title">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>03 / iOS 26 &amp; iPadOS UI SHOWCASE</p>
-          <h2 class="section-title" id="gallery-title">iOS 26 液态玻璃界面全览。</h2>
-        </div>
-        <p class="section-sub">1:1 对应 SwiftUI 源码视图的高保真界面预览：iPhone 实况日记流、红笔圈日历、AES-256 数据中心、纯黑白纸墨模式与 iPad Pro 分屏，点击任意画面即可顶层放大。</p>
-      </div>
-
-      <div class="gallery-grid">
-        <figure class="screen-card glass-panel glass-interactive">
-          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-journal.png" data-lightbox-title="日记 Capture · Purple Dark 液态玻璃">
-            <img src="assets/screens/iphone-journal.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone 日记页截图，展示实况照片卡片、歌曲标签与底部 Liquid Glass 悬浮胶囊栏">
+      <div class="gallery-grid" id="gallery">
+        <figure class="screen-card glass-surface glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-journal.png?v=2" data-lightbox-title="日记 Capture · 墨黑毛玻璃">
+            <img src="assets/screens/iphone-journal.png?v=2" width="588" height="1278" decoding="async" alt="Pickup iPhone 日记流界面，黑白极简搭配透明毛玻璃卡片">
           </button>
-          <figcaption class="screen-caption">
-            <strong>日记 Capture</strong>
-            <span>iPhone · Purple Dark</span>
-          </figcaption>
+          <figcaption class="screen-caption"><strong>日记 Capture</strong><span>墨黑毛玻璃</span></figcaption>
         </figure>
 
-        <figure class="screen-card glass-panel glass-interactive">
-          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-timeline.png" data-lightbox-title="时间线 Timeline · 红笔圈日与往年今日">
-            <img src="assets/screens/iphone-timeline.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone 时间线月历截图，记录日以有机红笔圆圈标记并展示往年今日记忆回响">
+        <figure class="screen-card glass-surface glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-timeline.png?v=2" data-lightbox-title="时间线 Timeline · 红笔圈日">
+            <img src="assets/screens/iphone-timeline.png?v=2" width="588" height="1278" decoding="async" alt="Pickup iPhone 时间线界面，红笔圈出记忆日期">
           </button>
-          <figcaption class="screen-caption">
-            <strong>时间线 Timeline</strong>
-            <span>红笔圈日 · 记忆回响</span>
-          </figcaption>
+          <figcaption class="screen-caption"><strong>时间线 Timeline</strong><span>红笔圈日</span></figcaption>
         </figure>
 
-        <figure class="screen-card glass-panel glass-interactive">
-          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-revisit.png" data-lightbox-title="去留 Revisit · 偶遇旧日与时间回应">
-            <img src="assets/screens/iphone-revisit.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone 去留页面截图，呈现复古金怀表偶遇卡片与向过去自己写回应的输入框">
+        <figure class="screen-card glass-surface glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-revisit.png?v=2" data-lightbox-title="去留 Revisit · 偶遇旧日">
+            <img src="assets/screens/iphone-revisit.png?v=2" width="588" height="1278" decoding="async" alt="Pickup iPhone 去留页面，偶遇旧日并写下今日回应">
           </button>
-          <figcaption class="screen-caption">
-            <strong>去留 Revisit</strong>
-            <span>复古金怀表 · 跨时空回应</span>
-          </figcaption>
+          <figcaption class="screen-caption"><strong>去留 Revisit</strong><span>跨时空写回</span></figcaption>
         </figure>
 
-        <figure class="screen-card glass-panel glass-interactive">
-          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-datavault.png" data-lightbox-title="数据中心 Data Vault · 定时备份与存储体检">
-            <img src="assets/screens/iphone-datavault.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone 数据中心截图，展示存储分布环状图、自动备份频率设置与快照列表">
+        <figure class="screen-card glass-surface glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-datavault.png?v=2" data-lightbox-title="数据中心 Data Vault · 本地导出与定时备份">
+            <img src="assets/screens/iphone-datavault.png?v=2" width="588" height="1278" decoding="async" alt="Pickup iPhone 数据中心界面，显示存储分布、导入导出与自动定时备份">
           </button>
-          <figcaption class="screen-caption">
-            <strong>数据中心 Data Vault</strong>
-            <span>存储分布 · SHA-256 快照</span>
-          </figcaption>
+          <figcaption class="screen-caption"><strong>数据中心 Data Vault</strong><span>导入导出 · 定时备份</span></figcaption>
         </figure>
 
-        <figure class="screen-card glass-panel glass-interactive">
-          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-mono.png" data-lightbox-title="纯黑白 Monochrome · 纸墨高对比模式">
-            <img src="assets/screens/iphone-mono.png" width="588" height="1278" loading="lazy" decoding="async" alt="Pickup iPhone 纯黑白 Monochrome 主题截图，深邃纯黑画布搭配暖象牙白排版">
+        <figure class="screen-card glass-surface glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/iphone-mono.png?v=2" data-lightbox-title="素白毛玻璃 · Paper Light Glass">
+            <img src="assets/screens/iphone-mono.png?v=2" width="588" height="1278" decoding="async" alt="Pickup iPhone 素白毛玻璃界面，纸墨高对比质感">
           </button>
-          <figcaption class="screen-caption">
-            <strong>纯黑白 Monochrome</strong>
-            <span>#060606 · 纸墨高对比</span>
-          </figcaption>
+          <figcaption class="screen-caption"><strong>素白毛玻璃</strong><span>Paper Light Glass</span></figcaption>
         </figure>
 
-        <figure class="screen-card is-wide glass-panel glass-interactive">
-          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/ipad-splitview.png" data-lightbox-title="iPad Pro Split-View · 三栏自适应工作台">
-            <img src="assets/screens/ipad-splitview.png" width="1366" height="1024" loading="lazy" decoding="async" alt="Pickup iPad Pro 三栏分屏截图，展示侧边栏、日记内容流与实时详情检查器">
+        <figure class="screen-card is-wide glass-surface glass-interactive">
+          <button type="button" class="screen-frame-btn" data-lightbox-src="assets/screens/ipad-splitview.png?v=2" data-lightbox-title="iPad Pro Split-View · 黑白三栏工作台">
+            <img src="assets/screens/ipad-splitview.png?v=2" width="1366" height="1024" decoding="async" alt="Pickup iPad Pro Split-View 界面，黑白透明毛玻璃三栏布局">
           </button>
-          <figcaption class="screen-caption">
-            <strong>iPad Pro Split-View</strong>
-            <span>三栏分屏 · 键盘快捷键</span>
-          </figcaption>
+          <figcaption class="screen-caption"><strong>iPad Pro Split-View</strong><span>三栏分屏 · 快捷键</span></figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- DATA SOVEREIGNTY & SCHEDULED BACKUP -->
-    <section class="wrap reveal-section" id="vault" aria-labelledby="vault-title">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>04 / DATA SOVEREIGNTY &amp; SCHEDULED BACKUP</p>
-          <h2 class="section-title" id="vault-title">不设云端服务器，数据主权 100% 握在自己手里。</h2>
-        </div>
-        <p class="section-sub">面向终身留存而设计的本地架构：Android v2 双向无损、CryptoKit 军用级加密、安全书签外置自动备份与存储体检。</p>
-      </div>
-
-      <div class="vault-bento">
-        <article class="vault-card glass-panel glass-interactive">
-          <span class="vault-card-kicker">01 · ANDROID v2 ↔ iOS 100% LOSSLESS ZIP</span>
-          <h3>与 Android / Web 版 v2 双向无损互通</h3>
-          <p>严格兼容 <code>pickup-portable-backup</code> v2 协议（<code>backup.json</code> + <code>media/</code>），同时通过非侵入式 <code>ios-extensions.json</code> 完整保留心情、天气、标签与星标；覆盖恢复前自动生成置顶 <code>.safetyPreRestore</code> 安全回滚快照。</p>
-        </article>
-
-        <article class="vault-card glass-panel glass-interactive">
-          <span class="vault-card-kicker">02 · CRYPTOKIT .pickupvault ENCRYPTION</span>
-          <h3>PBKDF2 + AES-256-GCM 本地加密保险箱</h3>
-          <p>所有文字与媒体先打包后以口令派生密钥（PBKDF2-HMAC-SHA256，80,000 次迭代 + 16 字节随机盐）封装为 AES-256-GCM 密文信封，附带 96-bit 随机 Nonce 与完整性认证标签，防篡改、零明文泄漏。</p>
-        </article>
-
-        <article class="vault-card glass-panel glass-interactive">
-          <span class="vault-card-kicker">03 · SECURITY-SCOPED EXTERNAL FOLDER</span>
-          <h3>外置目录自动定时备份 · 不惧 7 天续签</h3>
-          <p>结合 <code>BGAppRefreshTask</code> 与前后台调度器，按每 6 小时、每日 22:30 或每周自动生成带 SHA-256 校验码的快照，直接落盘至系统「文件 App」、iCloud Drive 或家庭 SMB NAS 的安全书签目录。</p>
-        </article>
-
-        <article class="vault-card glass-panel glass-interactive">
-          <span class="vault-card-kicker">04 · STORAGE HYGIENE &amp; AI ZERO-MEDIA</span>
-          <h3>孤儿媒体体检与 AI 零图片披露机制</h3>
-          <p>内置 <code>DataManagementService</code> 一键扫描孤儿残留媒体与缺失引用、排行最大视频体积；AI Hub 每次发送前强制弹出纯文本披露预览，保证 <code>0 bytes</code> 照片、实况与视频离开设备。</p>
-        </article>
-      </div>
-
-      <div class="vault-schema-bar glass-panel glass-interactive">
-        <div>
-          <strong>查阅完整 <code>pickup-portable-backup</code> v2 与 <code>.pickupvault</code> 信封规范</strong>
-          <p class="section-sub">开源透明格式，未来任何时候都可用标准工具解包迁移。</p>
-        </div>
-        <button type="button" class="btn-glass glass-pill" command="show-modal" commandfor="schema-dialog">预览 JSON / Vault 结构</button>
+    <!-- LITERARY QUOTE STRIP -->
+    <section class="quote-section" aria-label="设计理念">
+      <div class="wrap">
+        <span class="quote-star" aria-hidden="true">✳</span>
+        <p>有些瞬间，<br>在<span>回头看</span>的时候才发光。</p>
+        <small>为每一天，留一处安静的本地空间</small>
       </div>
     </section>
 
-    <!-- ZERO-FEE iOS INSTALLATION HUB -->
-    <section class="wrap reveal-section" id="install" aria-labelledby="install-title">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>05 / ZERO APPLE DEVELOPER FEE</p>
-          <h2 class="section-title" id="install-title">无需 App Store，无需 $99 开发者费，三步自由装机。</h2>
+    <!-- LOCAL DATA SOVEREIGNTY & AUTO-BACKUP -->
+    <section class="editorial-split wrap reveal-section" id="privacy" aria-labelledby="privacy-title">
+      <div class="section-heading">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> 你的文字，你的设备</p>
+        <h2 id="privacy-title">留在设备里，<br>也可以完整带走。</h2>
+        <p class="section-sub">不设账号与云端服务器。提供完整本地导入导出、自动定时本地备份与本地存储体检，换机或 7 天续签也从容不迫。</p>
+        <div style="margin-top: 24px;">
+          <button type="button" class="button glass-btn glass-surface glass-interactive" command="show-modal" commandfor="schema-dialog">查阅 v2 / .pickupvault 格式规范</button>
         </div>
-        <p class="section-sub">开源提供免签 IPA 与完整 Xcode 工程，配合外置目录自动备份，彻底告别证书过期焦虑。</p>
       </div>
 
-      <div class="install-card glass-panel glass-interactive">
-        <div class="install-tablist" role="tablist" aria-label="iOS 免签安装方式切换" focusgroup="tablist nomemory">
-          <button type="button" role="tab" class="sim-tab-btn" id="inst-tab-sidestore" aria-selected="true" focusgroupstart data-install-target="sidestore">SideStore / AltStore Wi-Fi 7天自动续签</button>
-          <button type="button" role="tab" class="sim-tab-btn" id="inst-tab-sideloadly" aria-selected="false" data-install-target="sideloadly">Sideloadly 电脑一键安装</button>
-          <button type="button" role="tab" class="sim-tab-btn" id="inst-tab-xcode" aria-selected="false" data-install-target="xcode">Xcode 免费 Personal Team 源码运行</button>
+      <div class="privacy-list">
+        <article>
+          <span>01 / 本地导入与导出</span>
+          <h3>Android v2 无损互通、AES-256 保险箱与 Markdown 文集。</h3>
+          <p>支持导出或合并/替换导入标准 Android v2 <code>.zip</code>、CryptoKit PBKDF2 + AES-256-GCM <code>.pickupvault</code> 以及百年可读 <code>.md.zip</code>；替换覆盖前自动创建安全回滚快照。</p>
+        </article>
+        <article>
+          <span>02 / 自动定时本地备份</span>
+          <h3>按计划落盘至文件 App、iCloud Drive 或家庭 NAS。</h3>
+          <p>支持每 6 小时、每日首选时刻、每周、内容变更防抖与退入后台触发备份，并内置保留份数自动轮换与锁定置顶保护。</p>
+        </article>
+        <article>
+          <span>03 / 本地存储清理与体检</span>
+          <h3>分类统计容量占用，一键回收孤儿冗余媒体。</h3>
+          <p>清晰统计文字、照片、视频与备份快照占用的准确字节数，扫描孤儿未引用文件与大体积媒体，保持本地仓库清爽轻量。</p>
+        </article>
+        <article>
+          <span>04 / 自选 AI 零媒体披露</span>
+          <h3>仅发送确认过的文字范围，0 bytes 图片与视频离开设备。</h3>
+          <p>每次调用 API 前展示条目数量、纯文本字符数及「0 bytes 媒体发送」确认单，隐私边界一目了然。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ZERO-FEE SIDELOAD & OPEN SOURCE BUILD -->
+    <section class="editorial-split build-section wrap reveal-section" id="build" aria-labelledby="build-title">
+      <div class="section-heading">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> 无需 $99 Apple 开发者费</p>
+        <h2 id="build-title">不上架商店。<br>依然自由装机。</h2>
+        <p class="section-sub">采用 MIT 开源协议。无需每年付费购买 Apple Developer 计划，使用普通免费 Apple ID 即可通过 SideStore、Sideloadly 或 Xcode 装入 iPhone 与 iPad。</p>
+        <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+          <a class="text-link" href="https://github.com/smartlotus/pickup-ios" target="_blank" rel="noopener noreferrer">在 GitHub 查看 iOS 应用仓库 ↗</a>
+          <a class="text-link" href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">前往 GitHub Releases 获取版本与工程包 ↗</a>
+        </div>
+      </div>
+
+      <div class="build-card glass-surface glass-interactive">
+        <div class="install-tablist" role="tablist" aria-label="免开发者费安装方式" focusgroup="tablist nomemory">
+          <button type="button" role="tab" class="install-tab-btn" id="inst-tab-sidestore" aria-selected="true" focusgroupstart data-install-target="sidestore">SideStore / AltStore 续签</button>
+          <button type="button" role="tab" class="install-tab-btn" id="inst-tab-sideloadly" aria-selected="false" data-install-target="sideloadly">Sideloadly</button>
+          <button type="button" role="tab" class="install-tab-btn" id="inst-tab-xcode" aria-selected="false" data-install-target="xcode">Xcode 免费运行</button>
         </div>
 
         <div class="install-panels">
           <div role="tabpanel" id="inst-panel-sidestore" aria-labelledby="inst-tab-sidestore">
-            <div class="panel-inner">
-              <h3>SideStore / AltStore：一次配对，手机 Wi-Fi 下自动续签</h3>
+            <div class="install-panel-inner">
+              <h3>SideStore / AltStore：Wi-Fi 下每 7 天自动续签</h3>
               <ol class="install-step-list">
-                <li>从 GitHub Releases 下载源码与预生成工程包（或运行仓库自带的 <code>scripts/enable_cloud_ipa_ci.sh</code> 在 GitHub <code>macos-26</code> 云端自动编译打包 <code>PickupIOS.ipa</code>）。</li>
-                <li>首次连接电脑完成配对后，日后仅需在 iPhone 上开启 StosVPN 即可无线 7 天自动续签。</li>
-                <li>建议在「数据中心」开启每日外部目录备份（文件 App / iCloud Drive），即使忘记续签也不会丢失任何日记。</li>
+                <li>克隆项目或从 Releases 获取 <code>PickupIOS</code> 工程与 CI 脚本。</li>
+                <li>首次配对后开启 StosVPN，即可脱离电脑在 iPhone Wi-Fi 下无线续签。</li>
+                <li>配合「数据保险箱 → 外部备份目录」定时保存至系统文件目录，数据 100% 安全。</li>
               </ol>
-              <div class="code-row">
-                <pre><code id="cmd-sidestore">git clone https://github.com/smartlotus/pickup-ios.git &amp;&amp; cd pickup-ios
+              <pre><code id="cmd-sidestore">git clone https://github.com/smartlotus/pickup-ios.git &amp;&amp; cd pickup-ios
 gh auth refresh -h github.com -s workflow &amp;&amp; bash scripts/enable_cloud_ipa_ci.sh</code></pre>
-                <span class="copy-wrap">
-                  <button type="button" class="copy-btn" data-copy-target="cmd-sidestore" aria-label="复制云端 IPA 构建命令">复制命令 ⧉</button>
-                  <span class="copy-status" role="status"></span>
-                </span>
-              </div>
-              <div class="hero-actions" style="margin: 0;">
-                <a class="btn-primary" href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">前往 GitHub Releases 获取 v1.0.0 ↗</a>
-                <a class="btn-ghost" href="https://github.com/smartlotus/pickup-ios" target="_blank" rel="noopener noreferrer">查看开源仓库 ↗</a>
+              <div class="copy-row">
+                <button type="button" class="copy-btn" data-copy-target="cmd-sidestore">复制命令 ⧉</button>
+                <span class="copy-status" role="status"></span>
               </div>
             </div>
           </div>
 
           <div role="tabpanel" id="inst-panel-sideloadly" aria-labelledby="inst-tab-sideloadly" hidden="until-found">
-            <div class="panel-inner">
-              <h3>Sideloadly（macOS / Windows）：免费 Apple ID 拖拽直装</h3>
+            <div class="install-panel-inner">
+              <h3>Sideloadly：普通 Apple ID 拖拽打包直装</h3>
               <ol class="install-step-list">
-                <li>在 Mac 或 Windows 打开 Sideloadly，通过数据线连接 iPhone 或 iPad。</li>
-                <li>将打包生成的 <code>PickupIOS.ipa</code> 拖入窗口，填入任意普通免费 Apple ID 点击 Start。</li>
-                <li>前往 iOS「设置 → 通用 → VPN 与设备管理」信任开发者描述文件即可启动。</li>
+                <li>在 Mac / Windows 连接 iPhone 或 iPad，将生成的 <code>PickupIOS.ipa</code> 拖入 Sideloadly。</li>
+                <li>输入免费 Apple ID 点击 Start，并在「设置 → 通用 → VPN 与设备管理」信任证书。</li>
               </ol>
-              <div class="code-row">
-                <pre><code id="cmd-sideloadly">git clone https://github.com/smartlotus/pickup-ios.git &amp;&amp; cd pickup-ios
+              <pre><code id="cmd-sideloadly">git clone https://github.com/smartlotus/pickup-ios.git &amp;&amp; cd pickup-ios
 ./scripts/package_ipa.sh build/Build/Products/Release-iphoneos/Pickup.app dist/PickupIOS.ipa</code></pre>
-                <span class="copy-wrap">
-                  <button type="button" class="copy-btn" data-copy-target="cmd-sideloadly" aria-label="复制 Sideloadly 打包命令">复制命令 ⧉</button>
-                  <span class="copy-status" role="status"></span>
-                </span>
+              <div class="copy-row">
+                <button type="button" class="copy-btn" data-copy-target="cmd-sideloadly">复制命令 ⧉</button>
+                <span class="copy-status" role="status"></span>
               </div>
             </div>
           </div>
 
           <div role="tabpanel" id="inst-panel-xcode" aria-labelledby="inst-tab-xcode" hidden="until-found">
-            <div class="panel-inner">
-              <h3>Xcode 免费 Personal Team：内置预生成工程，直接编译运行</h3>
+            <div class="install-panel-inner">
+              <h3>Xcode Personal Team：免付费账号直接真机编译</h3>
               <ol class="install-step-list">
-                <li>克隆仓库即可直接打开预生成的 <code>PickupIOS.xcodeproj</code>，并可执行 <code>swift test</code> 验证 14 项核心单元测试。</li>
-                <li>在 Signing &amp; Capabilities 选择个人免费 Apple ID，并将 Bundle ID 修改为你的专属后缀（如 <code>com.yourname.pickup</code>）。</li>
-                <li>选择连接的 iPhone 或 iPad 直接 Run，即可获得原生 120Hz ProMotion 与 Liquid Glass 全特性体验。</li>
+                <li>打开内置的 <code>PickupIOS.xcodeproj</code>，在 Signing 中选择个人免费 Apple ID。</li>
+                <li>可将 Bundle ID 改成你自己的反向域名（如 <code>com.yourname.pickup</code>）后直接 Run。</li>
               </ol>
-              <div class="code-row">
-                <pre><code id="cmd-xcode">git clone https://github.com/smartlotus/pickup-ios.git
-cd pickup-ios
+              <pre><code id="cmd-xcode">git clone https://github.com/smartlotus/pickup-ios.git &amp;&amp; cd pickup-ios
 swift test &amp;&amp; open PickupIOS.xcodeproj</code></pre>
-                <span class="copy-wrap">
-                  <button type="button" class="copy-btn" data-copy-target="cmd-xcode" aria-label="复制 Xcode 源码构建命令">复制命令 ⧉</button>
-                  <span class="copy-status" role="status"></span>
-                </span>
+              <div class="copy-row">
+                <button type="button" class="copy-btn" data-copy-target="cmd-xcode">复制命令 ⧉</button>
+                <span class="copy-status" role="status"></span>
               </div>
             </div>
           </div>
@@ -571,98 +563,72 @@ swift test &amp;&amp; open PickupIOS.xcodeproj</code></pre>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="wrap reveal-section" id="faq" aria-labelledby="faq-title">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>06 / FREQUENT QUESTIONS</p>
-          <h2 class="section-title" id="faq-title">常见问题与隐私说明。</h2>
-        </div>
+    <!-- NATIVE <DETAILS> FAQ -->
+    <section class="editorial-split faq-section wrap reveal-section" id="faq" aria-labelledby="faq-title">
+      <div class="section-heading">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> 常见疑问</p>
+        <h2 id="faq-title">开始前的几个问题。</h2>
       </div>
 
       <div class="faq-list">
-        <article class="faq-item glass-panel">
-          <h3>
-            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-a1">
-              <span>如果 7 天免费侧载证书过期了，里面的日记和照片会丢吗？</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-          </h3>
-          <div id="faq-a1" class="faq-panel" hidden>
-            <p>不会丢失。只要不手动卸载 App，使用同一 Apple ID 续签重装后所有沙盒数据都原封不动；并且强烈建议在「数据中心」绑定 iCloud Drive 或系统「文件 App」作为外置定时自动备份目录，即使重装设备或换新手机也能一键无损恢复。</p>
-          </div>
-        </article>
-
-        <article class="faq-item glass-panel">
-          <h3>
-            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-a2">
-              <span>从 Android 版 Pickup 导出的 ZIP 备份能直接导入 iOS 版吗？</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-          </h3>
-          <div id="faq-a2" class="faq-panel" hidden>
-            <p>100% 互通。iOS 版直接解析 Android v2 标准 <code>backup.json</code>、<code>media/</code> 以及更早的旧版 JSON 数组；从 iOS 导出的 ZIP 同样可以被 Android 版直接导入，同时保留 iOS 的心情、天气与标签扩展文件。</p>
-          </div>
-        </article>
-
-        <article class="faq-item glass-panel">
-          <h3>
-            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-a3">
-              <span>AI Hub 提问会把我的照片或未选中的隐私日记发出去吗？</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-          </h3>
-          <div id="faq-a3" class="faq-panel" hidden>
-            <p>绝不会。在发起任何 HTTPS 请求前，系统会强制展示「发送前隐私披露预览」，明确列出匹配的条数、纯文本字符数以及「0 bytes 媒体发送」声明，照片、实况视频与音频永远只留在本地。</p>
-          </div>
-        </article>
+        <details>
+          <summary>免费侧载 7 天证书到期，日记会丢失吗？</summary>
+          <p>不会。只要不卸载 App，使用同一 Apple ID 重签覆盖安装后所有本地沙盒数据均完好保留；并且你可以在「数据保险箱」开启每日外部目录备份，即使换手机也可随时导入恢复。</p>
+        </details>
+        <details>
+          <summary>Android 版 Pickup 导出的 ZIP 能直接导入 iOS 版吗？</summary>
+          <p>可以 100% 无损互通。iOS 版直接解析 Android v2 <code>backup.json</code>、<code>media/</code> 与旧版 JSON 数组；从 iOS 导出的标准 ZIP 也能回导入 Android，同时通过独立的 <code>ios-extensions.json</code> 保留新增元数据。</p>
+        </details>
+        <details>
+          <summary>不使用 AI 功能，能正常长期使用吗？</summary>
+          <p>完全可以。日记记录、Live Photo 实况与视频、红笔时间线、去留、加锁与全部本地导入导出/定时备份均 100% 离线独立运行。</p>
+        </details>
+        <details>
+          <summary>可以同时使用黑白深色和黑白浅色吗？</summary>
+          <p>可以。iOS 应用和本页面均支持「墨黑毛玻璃（#080808）」与「素白毛玻璃（#F5F4EF）」双纯黑白外观切换，保持极简一致。</p>
+        </details>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer wrap">
-    <div class="footer-wordmark" aria-hidden="true">拾 · Pickup</div>
-    <div class="footer-meta">
+  <footer class="wrap">
+    <a class="footer-logo" href="#main-content">Pickup<span>.</span></a>
+    <div class="footer-mid">
+      <p>记录日常，回望旧日，留在自己手里。</p>
       <span>© 2026 渚有潜 / Zhuyouqian · MIT License</span>
-      <div class="footer-links">
-        <a href="https://github.com/smartlotus/pickup-ios" target="_blank" rel="noopener noreferrer">GitHub 源码 ↗</a>
-        <a href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">下载 IPA ↗</a>
-        <a href="en.html" lang="en" hreflang="en">English Version</a>
-        <a href="#main-content">回到顶部 ↑</a>
-      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/smartlotus/pickup-ios" target="_blank" rel="noopener noreferrer">iOS 源码 ↗</a>
+      <a href="https://github.com/smartlotus/pickup-ios/releases/latest" target="_blank" rel="noopener noreferrer">Releases ↗</a>
+      <a href="en.html" lang="en" hreflang="en">English</a>
     </div>
   </footer>
 
-  <!-- Native Top-Layer Cinema Modal -->
+  <!-- Cinema Dialog -->
   <dialog id="film-dialog" closedby="any" aria-labelledby="film-dialog-title">
     <div class="dialog-surface">
       <div class="dialog-head">
-        <h2 id="film-dialog-title">Pickup for iOS 26 · 60fps 介绍影片</h2>
-        <button type="button" class="dialog-close-btn" command="close" commandfor="film-dialog" autofocus aria-label="关闭影片窗口">✕</button>
+        <h2 id="film-dialog-title">Pickup for iOS · 60fps 介绍短片</h2>
+        <button type="button" class="dialog-close-btn" command="close" commandfor="film-dialog" autofocus aria-label="关闭短片弹窗">✕</button>
       </div>
-      <video id="intro-video" class="cinema-video" controls playsinline preload="none" loading="lazy" width="1280" height="720" poster="assets/video-poster.png">
+      <video id="intro-video" class="cinema-video" controls playsinline preload="none" width="1920" height="1080" poster="assets/video-poster.png">
         <source src="assets/pickup-ios-intro.mp4" type="video/mp4">
       </video>
-      <div class="chapter-row" role="group" aria-label="影片章节跳转">
+      <div class="chapter-row" role="group" aria-label="短片章节跳转">
         <button type="button" class="sim-mini-btn" data-chapter-time="0">00:00 拾起日常</button>
-        <button type="button" class="sim-mini-btn" data-chapter-time="8">00:08 液态玻璃</button>
-        <button type="button" class="sim-mini-btn" data-chapter-time="16">00:16 红笔时间线</button>
-        <button type="button" class="sim-mini-btn" data-chapter-time="24">00:24 AI 披露与金库</button>
-        <button type="button" class="sim-mini-btn" data-chapter-time="32">00:32 免费装机</button>
+        <button type="button" class="sim-mini-btn" data-chapter-time="6">00:06 黑白毛玻璃</button>
+        <button type="button" class="sim-mini-btn" data-chapter-time="13">00:13 红笔时间线与去留</button>
+        <button type="button" class="sim-mini-btn" data-chapter-time="23">00:23 本地导入导出与侧载</button>
       </div>
-      <details class="transcript-details">
-        <summary>查看影片文字实录 / 旁白简介</summary>
-        <p>00:00 怀表转过零点，手写红笔圈起「拾」字；00:08 展示 iOS 26 Liquid Glass 在纯黑白与紫夜深色之间的光学折射；00:16 演示红笔日历标记、往年今日回响与跨时空写入回应；00:24 演示 AI Hub 纯文本隐私披露（0 bytes 媒体发送）与 AES-256-GCM 数据保险箱；00:32 介绍 SideStore 无线续签与零 $99 开发者费开源部署。</p>
-      </details>
     </div>
   </dialog>
 
-  <!-- Native Top-Layer Schema Inspection Modal -->
+  <!-- Schema Dialog -->
   <dialog id="schema-dialog" closedby="any" aria-labelledby="schema-dialog-title">
     <div class="dialog-surface">
       <div class="dialog-head">
-        <h2 id="schema-dialog-title">pickup-portable-backup v2 &amp; .pickupvault 格式规范</h2>
-        <button type="button" class="dialog-close-btn" command="close" commandfor="schema-dialog" autofocus aria-label="关闭格式规范窗口">✕</button>
+        <h2 id="schema-dialog-title">pickup-portable-backup v2 与 .pickupvault 结构</h2>
+        <button type="button" class="dialog-close-btn" command="close" commandfor="schema-dialog" autofocus aria-label="关闭规范弹窗">✕</button>
       </div>
       <pre class="vault-format-pre"><code>{
   "format": "pickup-portable-backup",
@@ -680,7 +646,7 @@ swift test &amp;&amp; open PickupIOS.xcodeproj</code></pre>
   "aiEntries": []
 }
 
-// .pickupvault Envelope (CryptoKit)
+// CryptoKit AES-256-GCM .pickupvault
 {
   "format": "pickup-ios-vault",
   "version": 1,
@@ -690,12 +656,12 @@ swift test &amp;&amp; open PickupIOS.xcodeproj</code></pre>
     </div>
   </dialog>
 
-  <!-- Native Top-Layer Screenshot Lightbox Modal -->
+  <!-- Screenshot Lightbox Dialog -->
   <dialog id="lightbox-dialog" closedby="any" aria-labelledby="lightbox-title">
     <div class="dialog-surface">
       <div class="dialog-head">
-        <h2 id="lightbox-title">真机界面预览</h2>
-        <button type="button" class="dialog-close-btn" command="close" commandfor="lightbox-dialog" autofocus aria-label="关闭截图预览">✕</button>
+        <h2 id="lightbox-title">界面预览</h2>
+        <button type="button" class="dialog-close-btn" command="close" commandfor="lightbox-dialog" autofocus aria-label="关闭大图预览">✕</button>
       </div>
       <img id="lightbox-img" class="lightbox-img" src="assets/icon.png" width="588" height="1278" alt="">
     </div>

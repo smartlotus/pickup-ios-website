@@ -43,7 +43,7 @@ export const Scene5Outro: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ opacity: enterOpacity * finalFadeOut }}>
-      <AuroraBackdrop monoMix={0.35} goldGlow={0.65} />
+      <AuroraBackdrop lightMix={0} />
 
       <div
         style={{
@@ -57,11 +57,11 @@ export const Scene5Outro: React.FC = () => {
           justifyContent: 'center',
         }}
       >
-        {/* Authentic App Icon inside Liquid Glass Halo */}
+        {/* Authentic App Icon inside Pure Monochrome Frosted Halo */}
         <div
           style={{
             position: 'relative',
-            marginBottom: 38,
+            marginBottom: 34,
             transform: `scale(${interpolate(iconSpring, [0, 1], [0.8, 1])})`,
             opacity: iconSpring,
           }}
@@ -69,24 +69,24 @@ export const Scene5Outro: React.FC = () => {
           <div
             style={{
               position: 'absolute',
-              inset: -36,
+              inset: -38,
               borderRadius: '50%',
               transform: `scale(${haloScale})`,
               background:
-                'radial-gradient(circle, rgba(167,139,250,0.34) 0%, rgba(197,168,106,0.16) 45%, transparent 72%)',
-              filter: 'blur(20px)',
+                'radial-gradient(circle, rgba(244,243,237,0.20) 0%, rgba(216,215,208,0.06) 48%, transparent 72%)',
+              filter: 'blur(22px)',
             }}
           />
 
           <div
             style={{
               position: 'relative',
-              width: 186,
-              height: 186,
+              width: 182,
+              height: 182,
               borderRadius: 44,
               padding: 6,
               background:
-                'linear-gradient(145deg, rgba(255,255,255,0.42), rgba(167,139,250,0.26) 50%, rgba(197,168,106,0.32))',
+                'linear-gradient(145deg, rgba(255,255,255,0.44), rgba(255,255,255,0.08) 52%, rgba(255,255,255,0.22))',
               boxShadow:
                 '0 30px 70px rgba(0,0,0,0.72), inset 0 1.5px 1px rgba(255,255,255,0.55)',
             }}
@@ -113,7 +113,7 @@ export const Scene5Outro: React.FC = () => {
           </div>
         </div>
 
-        {/* Title */}
+        {/* Clean "Pickup." Editorial Lockup */}
         <div
           style={{
             opacity: textSpring,
@@ -125,54 +125,56 @@ export const Scene5Outro: React.FC = () => {
         >
           <div
             style={{
-              fontFamily: FONT_SANS,
-              fontSize: 32,
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              color: BRAND_COLORS.purpleLight,
-              marginBottom: 16,
+              fontFamily: FONT_SERIF,
+              fontSize: 84,
+              fontWeight: 700,
+              letterSpacing: '0.03em',
+              color: BRAND_COLORS.ivory,
+              lineHeight: 1.05,
+              marginBottom: 14,
             }}
           >
-            Pickup for iPhone &amp; iPad
+            Pickup.
           </div>
 
           <div
             style={{
-              position: 'relative',
-              fontFamily: FONT_SERIF,
-              fontSize: 74,
-              fontWeight: 700,
-              color: BRAND_COLORS.ivory,
-              letterSpacing: '0.05em',
-              display: 'inline-flex',
-              alignItems: 'center',
+              fontFamily: FONT_SANS,
+              fontSize: 22,
+              fontWeight: 500,
+              letterSpacing: '0.14em',
+              color: BRAND_COLORS.muted,
+              textTransform: 'uppercase',
+              marginBottom: 20,
             }}
           >
-            <span>留在设备里，也可以带走。</span>
-            <span
-              style={{
-                position: 'absolute',
-                right: -28,
-                width: 13,
-                height: 13,
-                borderRadius: '50%',
-                backgroundColor: BRAND_COLORS.redPen,
-                boxShadow: `0 0 18px ${BRAND_COLORS.redPen}`,
-              }}
-            />
+            for iPhone &amp; iPad
+          </div>
+
+          <div
+            style={{
+              fontFamily: FONT_SERIF,
+              fontSize: 48,
+              fontWeight: 600,
+              color: BRAND_COLORS.silver,
+              letterSpacing: '0.06em',
+            }}
+          >
+            留在设备里，也可以带走。
           </div>
         </div>
 
         {/* Bottom Website & GitHub Pill */}
         <div
           style={{
-            marginTop: 48,
+            marginTop: 46,
             opacity: linkSpring,
             transform: `translateY(${interpolate(linkSpring, [0, 1], [16, 0])}px)`,
           }}
         >
           <LiquidGlassCapsule
-            dotColor={BRAND_COLORS.gold}
+            dotColor={BRAND_COLORS.ivory}
+            lightMix={0}
             style={{
               padding: '14px 28px',
               fontSize: 20,
